@@ -1,17 +1,46 @@
 import React from "react";
+import { useState, useEffect } from "react";
+
+async function getDashboardResponse(setDashboardResponse) {
+    
+    fetch("http://localhost:3000/index/dashboard", { mode: "cors" })
+
+        .then((response) => response.json())
+        .then((responseBody) => setDashboardResponse(responseBody))
+
+        .catch((error) => console.log(error));
+}
 
 function Header(){
 
-    return(
+    const [ dashboardResponse, setDashboardResponse ] = useState();
+    useEffect(() => { getDashboardResponse(setDashboardResponse); }, []);
 
-        <div id="top-nav">
+    if(dashboardResponse){
 
-            <div id="header-container">
-                <a id="header" href="/">Blog API</a>
+        return(
+
+            <div id="top-nav">
+
+                <div id="header-container">
+                    <a id="header" href="/">Blog API</a>
+                </div>
+                
+                <div id="header-info">
+
+                    <div id="tool-container"> 
+                        <a id="create-post" href="">Create</a>
+                    </div>
+
+                    <div id="post-count-container"> 
+                        <p id="post-count">Posts: {dashboardResponse.posts.length}</p>
+                    </div>
+
+                </div>
+
             </div>
-            
-        </div>
-    );
+        );
+    }
 }
 
 export default Header;
