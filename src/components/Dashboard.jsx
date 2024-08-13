@@ -11,7 +11,31 @@ async function getDashboard(setDashboardResponse){
         .catch((error) => console.log(error));
 }
 
+function ListItem(props){
+
+    return(
+
+        <div className="list-item">
+
+            <div className="item-title">
+                {props.post.title}
+            </div>
+
+            <div className="item-timestamp">
+                {props.post.formattedTimestamp}
+            </div>
+
+            <div className="item-publishStatus">
+                {(props.post.publishStatus ? "Published" : "Unpublished")}
+            </div>
+
+        </div>
+    );
+}
+
 function Dashboard(){
+
+    let  index = 0;
 
     const [ dashboardResponse, setDashboardResponse ] = useState();
     useEffect(() => { getDashboard(setDashboardResponse); }, [] );
@@ -19,8 +43,11 @@ function Dashboard(){
     if(dashboardResponse){
 
         return(
-            <div>
-                {dashboardResponse.posts.map((post) => <div>{post._id}</div>)}
+            
+            <div id="list-container">
+
+                {dashboardResponse.posts.map((post) => <ListItem key={index} index={index++} post={post}/>)}
+
             </div>
         );
     }
