@@ -17,12 +17,16 @@ function ListItem(props){
 
         <div className="list-item">
 
-            <div className="item-title">
-                {props.post.title}
-            </div>
+            <div className="list-item-info">
 
-            <div className="item-timestamp">
-                {props.post.formattedTimestamp}
+                <div className="item-title">
+                    {props.post.title}
+                </div>
+
+                <div className="item-timestamp">
+                    Created: {props.post.formattedTimestamp}
+                </div>
+
             </div>
 
             <div className="item-publishStatus">

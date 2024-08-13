@@ -51,3 +51,45 @@ body{
 #post-count{
   margin: 0;
 }
+
+#list-container{
+
+  display: flex;
+  justify-content:space-between;
+
+  gap: 10px;
+  flex-direction: column;
+
+  padding: 10px 0px;
+}
+
+.list-item{
+
+  padding: 10px;
+  
+  display: flex;
+  
+  align-items: center;
+  justify-content:space-between;
+
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+.list-item-info{
+
+  display: flex;
+
+  gap: 2px;
+  flex-direction: column;
+}
+
+.item-title{
+  font-size: 1.25rem;
+}
+
+.item-timestamp{
+
+  padding-left: 2.5px;
+  font-size: 0.8rem;
+}
