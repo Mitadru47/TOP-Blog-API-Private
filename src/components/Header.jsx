@@ -33,7 +33,7 @@ function Header(){
                     </div>
 
                     <div id="post-count-container"> 
-                        <p id="post-count">Posts: {dashboardResponse.posts.length}</p>
+                        <p id="post-count">Total Posts: {dashboardResponse.posts.length}</p>
                     </div>
 
                 </div>
