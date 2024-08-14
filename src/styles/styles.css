@@ -70,7 +70,7 @@ body{
   display: flex;
   
   align-items: center;
-  justify-content:space-between;
+  justify-content: space-between;
 
   border: 2px solid black;
   border-radius: 10px;
@@ -88,8 +88,115 @@ body{
   font-size: 1.25rem;
 }
 
+.item-title a{
+
+  text-decoration: none;
+  color: black;
+}
+
+.item-title a:hover{
+  text-decoration: underline;
+}
+
 .item-timestamp{
 
   padding-left: 2.5px;
   font-size: 0.8rem;
+}
+
+.list-item-tools{
+
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  /* border: 2px solid black; */
+  width: 20vw;
+}
+
+.item-edit a{
+
+  text-decoration: none;
+  color: black;
+}
+
+.item-edit a:hover{
+  text-decoration: underline;
+}
+
+.item-delete a{
+
+  text-decoration: none;
+  color: black;
+}
+
+.item-delete a:hover{
+  text-decoration: underline;
+}
+
+.item-publish-status-container{
+  width: 100px;
+}
+
+.item-publish-status a div{
+  
+  text-align: center;
+
+  padding: 10px 10px;
+
+  border: 2px solid black;
+  border-radius: 10px; 
+}
+
+#publish-button{
+  background-color: #D5ED9F;
+}
+
+#publish-secondary{
+  display: none;
+}
+
+#publish-button:hover #publish-primary{
+  display: none;
+}
+
+#publish-button:hover #publish-secondary{
+  display: inline;
+}
+
+#publish-button:hover{
+  background-color: #FFDA76;
+}
+
+#unpublish-button{
+  background-color: #FFDA76;
+}
+
+#unpublish-secondary{
+  display: none;
+}
+
+#unpublish-button:hover #unpublish-primary{
+  display: none;
+}
+
+#unpublish-button:hover #unpublish-secondary{
+  display: inline;
+}
+
+#unpublish-button:hover{
+  background-color: #D5ED9F;
+}
+
+.item-publish-status a{
+
+  text-decoration: none;
+  color: black;
+}
+
+.item-publish-status a div:hover{
+
+  border: 2px dashed black;
+  border-radius: 10px;
 }

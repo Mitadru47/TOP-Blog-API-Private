@@ -20,7 +20,7 @@ function ListItem(props){
             <div className="list-item-info">
 
                 <div className="item-title">
-                    {props.post.title}
+                    <a href="">{props.post.title}</a>
                 </div>
 
                 <div className="item-timestamp">
@@ -29,8 +29,47 @@ function ListItem(props){
 
             </div>
 
-            <div className="item-publishStatus">
-                {(props.post.publishStatus ? "Published" : "Unpublished")}
+            <div className="list-item-tools">
+
+                <div className="item-edit">
+                    <a href="">Edit</a>
+                </div>
+
+                <div className="item-delete">
+                    <a href="">Delete</a>
+                </div>
+
+                <div className="item-publish-status-container">
+
+                    <div className="item-publish-status">
+                        
+                        <a href="">
+                            
+                            {(props.post.publishStatus ? 
+                            
+                                <div id="publish-button">
+                                
+                                    <span id="publish-primary">Published</span>
+                                    <span id="publish-secondary">Unpublish?</span>
+                                    
+                                </div> 
+                                
+                                : 
+                                
+                                <div id="unpublish-button">
+                                    
+                                    <span id="unpublish-primary">Unpublished</span>
+                                    <span id="unpublish-secondary">Publish?</span>
+                                    
+                                </div> 
+                            )}
+                            
+                        </a>
+
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
