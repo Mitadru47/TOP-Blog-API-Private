@@ -42,29 +42,25 @@ function ListItem(props){
                 <div className="item-publish-status-container">
 
                     <div className="item-publish-status">
+                         
+                        {(props.post.publishStatus ? 
                         
-                        <a href="">
+                            <a href={props.post.url + "/publish"} id="publish-button">
                             
-                            {(props.post.publishStatus ? 
+                                <span id="publish-primary">Published</span>
+                                <span id="publish-secondary">Unpublish?</span>
+                                
+                            </a> 
                             
-                                <div id="publish-button">
-                                
-                                    <span id="publish-primary">Published</span>
-                                    <span id="publish-secondary">Unpublish?</span>
-                                    
-                                </div> 
-                                
-                                : 
-                                
-                                <div id="unpublish-button">
-                                    
-                                    <span id="unpublish-primary">Unpublished</span>
-                                    <span id="unpublish-secondary">Publish?</span>
-                                    
-                                </div> 
-                            )}
+                            : 
                             
-                        </a>
+                            <a href={props.post.url + "/unpublish"} id="unpublish-button">
+                                
+                                <span id="unpublish-primary">Unpublished</span>
+                                <span id="unpublish-secondary">Publish?</span>
+                                
+                            </a> 
+                        )}
 
                     </div>
 

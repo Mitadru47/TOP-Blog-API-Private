@@ -135,18 +135,26 @@ body{
   text-decoration: underline;
 }
 
-.item-publish-status-container{
-  width: 100px;
-}
+.item-publish-status a{
 
-.item-publish-status a div{
-  
+  display: inline-block;
+  width: 100px;
+
   text-align: center;
 
-  padding: 10px 10px;
+  padding: 10px 5px;
 
   border: 2px solid black;
   border-radius: 10px; 
+
+  text-decoration: none;
+  color: black;
+}
+
+.item-publish-status a:hover{
+
+  border: 2px dashed black;
+  border-radius: 10px;
 }
 
 #publish-button{
@@ -187,16 +195,4 @@ body{
 
 #unpublish-button:hover{
   background-color: #D5ED9F;
-}
-
-.item-publish-status a{
-
-  text-decoration: none;
-  color: black;
-}
-
-.item-publish-status a div:hover{
-
-  border: 2px dashed black;
-  border-radius: 10px;
 }
