@@ -1,8 +1,12 @@
+/* Global */
+
 body{
 
   padding: 5vw;
   font-family: "Patrick Hand", cursive;
 }
+
+/* Header.jsx */
 
 #top-nav{
 
@@ -12,6 +16,8 @@ body{
   padding: 0 10px;
   padding-bottom: 30px;
 }
+
+/* Header.jsx - Section A */
 
 #header{
 
@@ -27,6 +33,8 @@ body{
 #header:hover{
   text-decoration: underline;
 }
+
+/* Header.jsx - Section B */
 
 #header-info{
 
@@ -52,6 +60,8 @@ body{
   margin: 0;
 }
 
+/* Dashboard.jsx */
+
 #list-container{
 
   display: flex;
@@ -75,6 +85,8 @@ body{
   border: 2px solid black;
   border-radius: 10px;
 }
+
+/* Dashboard.jsx - Section A */
 
 .list-item-info{
 
@@ -103,6 +115,8 @@ body{
   padding-left: 2.5px;
   font-size: 0.8rem;
 }
+
+/* Dashboard.jsx - Section B */
 
 .list-item-tools{
 
@@ -155,6 +169,9 @@ body{
   border: 2px dashed black;
   border-radius: 10px;
 }
+
+/* Dashboard.jsx - Section B - Publish/Unpublish Button(s) */
+/* Alternate Spans/Text - Custom Styling  */
 
 #publish-secondary{
   display: none;
