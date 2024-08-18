@@ -45,21 +45,29 @@ function ListItem(props){
                          
                         {(props.post.publishStatus ? 
                         
-                            <a href={props.post.url + "/publish"} id="publish-button">
+                            <form target="status" action={"http://localhost:3000/index/post/" + props.post._id + "/publishStatus/unpublish"} method="POST">
                             
-                                <span id="publish-primary">Published</span>
-                                <span id="publish-secondary">Unpublish?</span>
+                                <button type="submit" id="publish-button" >
                                 
-                            </a> 
+                                    <span id="publish-primary">Published</span>
+                                    <span id="publish-secondary">Unpublish?</span>
+                                    
+                                </button> 
+
+                            </form>
                             
                             : 
                             
-                            <a href={props.post.url + "/unpublish"} id="unpublish-button">
-                                
-                                <span id="unpublish-primary">Unpublished</span>
-                                <span id="unpublish-secondary">Publish?</span>
-                                
-                            </a> 
+                            <form target="status" action={"http://localhost:3000/index/post/" + props.post._id + "/publishStatus/publish"} method="POST">
+
+                                <button type="submit" id="unpublish-button" >
+                                    
+                                    <span id="unpublish-primary">Unpublished</span>
+                                    <span id="unpublish-secondary">Publish?</span>
+                                    
+                                </button> 
+
+                            </form>
                         )}
 
                     </div>
@@ -77,15 +85,17 @@ function Dashboard(){
     let  index = 0;
 
     const [ dashboardResponse, setDashboardResponse ] = useState();
-    useEffect(() => { getDashboard(setDashboardResponse); }, [] );
-
+    useEffect(() => { getDashboard(setDashboardResponse); });
+    
     if(dashboardResponse){
 
         return(
             
             <div id="list-container">
 
-                {dashboardResponse.posts.map((post) => <ListItem key={index} index={index++} post={post}/>)}
+                {dashboardResponse.posts.map((post) => <ListItem key={index} index={index++} post={post} />)}
+                
+                <iframe id="status" name="status"></iframe>
 
             </div>
         );

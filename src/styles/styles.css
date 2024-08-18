@@ -148,7 +148,7 @@ body{
   text-decoration: underline;
 }
 
-.item-publish-status a{
+.item-publish-status button{
 
   display: inline-block;
   width: 100px;
@@ -162,9 +162,11 @@ body{
 
   text-decoration: none;
   color: black;
+
+  background-color: white;
 }
 
-.item-publish-status a:hover{
+.item-publish-status button:hover{
 
   border: 2px dashed black;
   border-radius: 10px;
@@ -195,4 +197,13 @@ body{
 
 #unpublish-button:hover #unpublish-secondary{
   display: inline;
+}
+
+iframe{
+
+  padding: 25px;
+  margin: 50px 0;
+
+  border: 2px dotted black;
+  border-radius: 10px;
 }
