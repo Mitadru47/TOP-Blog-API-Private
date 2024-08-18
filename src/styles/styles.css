@@ -111,7 +111,6 @@ body{
   justify-content: space-between;
   align-items: center;
 
-  /* border: 2px solid black; */
   width: 20vw;
 }
 
@@ -157,10 +156,6 @@ body{
   border-radius: 10px;
 }
 
-#publish-button{
-  background-color: #D5ED9F;
-}
-
 #publish-secondary{
   display: none;
 }
@@ -173,14 +168,6 @@ body{
   display: inline;
 }
 
-#publish-button:hover{
-  background-color: #FFDA76;
-}
-
-#unpublish-button{
-  background-color: #FFDA76;
-}
-
 #unpublish-secondary{
   display: none;
 }
@@ -191,8 +178,4 @@ body{
 
 #unpublish-button:hover #unpublish-secondary{
   display: inline;
-}
-
-#unpublish-button:hover{
-  background-color: #D5ED9F;
 }
