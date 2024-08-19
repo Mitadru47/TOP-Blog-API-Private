@@ -13,9 +13,17 @@ async function getDashboard(setDashboardResponse){
 
 function ListItem(props){
 
+    let color = "white";
+
+    if(props.post.publishStatus === true)
+        color = "#B4E380";
+
+    else
+        color = "#FFCF96";
+
     return(
 
-        <div className="list-item">
+        <div className="list-item" id={"item-" + props.post.id} style={{backgroundColor: color}}>
 
             <div className="list-item-info">
 
@@ -47,10 +55,12 @@ function ListItem(props){
                         
                             <form target="status" action={"http://localhost:3000/index/post/" + props.post._id + "/publishStatus/unpublish"} method="POST">
                             
-                                <button type="submit" id="publish-button" >
+                                <button type="submit" className="publish-button" id={"publish-" + props.post._id}>
                                 
                                     <span id="publish-primary">Published</span>
+
                                     <span id="publish-secondary">Unpublish?</span>
+                                    <span id="publish-tertiary">Unpublishing..</span>
                                     
                                 </button> 
 
@@ -60,10 +70,12 @@ function ListItem(props){
                             
                             <form target="status" action={"http://localhost:3000/index/post/" + props.post._id + "/publishStatus/publish"} method="POST">
 
-                                <button type="submit" id="unpublish-button" >
+                                <button type="submit" className="unpublish-button" id={"unpublish-" + props.post._id}>
                                     
                                     <span id="unpublish-primary">Unpublished</span>
+
                                     <span id="unpublish-secondary">Publish?</span>
+                                    <span id="unpublish-tertiary">Publishing..</span>
                                     
                                 </button> 
 

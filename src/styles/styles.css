@@ -163,7 +163,7 @@ body{
   text-decoration: none;
   color: black;
 
-  background-color: white;
+  background-color: #FDFFAE;
 }
 
 .item-publish-status button:hover{
@@ -175,27 +175,71 @@ body{
 /* Dashboard.jsx - Section B - Publish/Unpublish Button(s) */
 /* Alternate Spans/Text - Custom Styling  */
 
+/* publish Block */
+
 #publish-secondary{
   display: none;
 }
 
-#publish-button:hover #publish-primary{
+#publish-tertiary{
   display: none;
 }
 
-#publish-button:hover #publish-secondary{
+/* :hover Actions */
+
+.publish-button:hover #publish-primary{
+  display: none;
+}
+
+.publish-button:hover #publish-secondary{
   display: inline;
 }
+
+/* :active Actions */
+
+.publish-button:active #publish-primary{
+  display: none;
+}
+
+.publish-button:active #publish-secondary{
+  display: none;
+}
+
+.publish-button:active #publish-tertiary{
+  display: inline;
+}
+
+/* unpublish Block */
 
 #unpublish-secondary{
   display: none;
 }
 
-#unpublish-button:hover #unpublish-primary{
+#unpublish-tertiary{
   display: none;
 }
 
-#unpublish-button:hover #unpublish-secondary{
+/* :hover Actions */
+
+.unpublish-button:hover #unpublish-primary{
+  display: none;
+}
+
+.unpublish-button:hover #unpublish-secondary{
+  display: inline;
+}
+
+/* :active Actions */
+
+.unpublish-button:active #unpublish-primary{
+  display: none;
+}
+
+.unpublish-button:active #unpublish-secondary{
+  display: none;
+}
+
+.unpublish-button:active #unpublish-tertiary{
   display: inline;
 }
 
