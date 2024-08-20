@@ -163,7 +163,7 @@ body{
   text-decoration: none;
   color: black;
 
-  background-color: #FDFFAE;
+  background-color: white;
 }
 
 .item-publish-status button:hover{
@@ -244,6 +244,8 @@ body{
 }
 
 iframe{
+
+  display: none;
 
   padding: 25px;
   margin: 50px 0;

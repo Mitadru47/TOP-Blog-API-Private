@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 async function getDashboard(setDashboardResponse){
 
-    fetch("http://localhost:3000/index/dashboard", { mode: "cors" })
+    fetch("http://localhost:3000/dashboard", { mode: "cors" })
 
         .then((response) => response.json())
         .then((responseBody) => setDashboardResponse(responseBody))
@@ -53,7 +53,7 @@ function ListItem(props){
                          
                         {(props.post.publishStatus ? 
                         
-                            <form target="status" action={"http://localhost:3000/index/post/" + props.post._id + "/publishStatus/unpublish"} method="POST">
+                            <form target="status" action={"http://localhost:3000/dashboard/post/" + props.post._id + "/publishStatus/unpublish"} method="POST">
                             
                                 <button type="submit" className="publish-button" id={"publish-" + props.post._id}>
                                 
@@ -68,7 +68,7 @@ function ListItem(props){
                             
                             : 
                             
-                            <form target="status" action={"http://localhost:3000/index/post/" + props.post._id + "/publishStatus/publish"} method="POST">
+                            <form target="status" action={"http://localhost:3000/dashboard/post/" + props.post._id + "/publishStatus/publish"} method="POST">
 
                                 <button type="submit" className="unpublish-button" id={"unpublish-" + props.post._id}>
                                     

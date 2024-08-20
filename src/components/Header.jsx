@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 async function getDashboardResponse(setDashboardResponse) {
     
-    fetch("http://localhost:3000/index/dashboard", { mode: "cors" })
+    fetch("http://localhost:3000/dashboard", { mode: "cors" })
 
         .then((response) => response.json())
         .then((responseBody) => setDashboardResponse(responseBody))
@@ -14,7 +14,7 @@ async function getDashboardResponse(setDashboardResponse) {
 function Header(){
 
     const [ dashboardResponse, setDashboardResponse ] = useState();
-    useEffect(() => { getDashboardResponse(setDashboardResponse); }, []);
+    useEffect(() => { getDashboardResponse(setDashboardResponse); });
 
     if(dashboardResponse){
 
