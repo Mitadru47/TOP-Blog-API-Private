@@ -28,7 +28,7 @@ function ListItem(props){
             <div className="list-item-info">
 
                 <div className="item-title">
-                    <a href="">{props.post.title}</a>
+                    <a href={"/dashboard" + props.post.url}>{props.post.title}</a>
                 </div>
 
                 <div className="item-timestamp">
@@ -105,8 +105,7 @@ function Dashboard(){
             
             <div id="list-container">
 
-                {dashboardResponse.posts.map((post) => <ListItem key={index} index={index++} post={post} />)}
-                
+                {dashboardResponse.posts.map((post) => <ListItem key={index} index={index++} post={post} />)}               
                 <iframe id="status" name="status"></iframe>
 
             </div>
