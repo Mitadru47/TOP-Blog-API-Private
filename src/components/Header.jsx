@@ -29,7 +29,7 @@ function Header(){
                 <div id="header-info">
 
                     <div id="tool-container"> 
-                        <a id="create-post" href="">Create</a>
+                        <a id="create-post" href="/dashboard/post/create">Create</a>
                     </div>
 
                     <div id="post-count-container"> 

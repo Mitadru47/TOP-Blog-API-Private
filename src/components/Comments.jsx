@@ -53,9 +53,9 @@ function Comments(props){
 
         return(
 
-            <div id="comments-container">
+            <div className="comments-container">
 
-                <h2>Comments</h2>
+                <h2 id="comments-header">Comments</h2>
                 <div id="no-comments">No Comments</div>
             
             </div>

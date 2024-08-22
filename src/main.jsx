@@ -7,7 +7,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Header from "./components/Header.jsx";
 import Dashboard from "./components/Dashboard.jsx";
+
 import PostDetail from "./components/PostDetail.jsx";
+import PostCreator from "./components/PostCreator.jsx";
 
 const router = createBrowserRouter([
 
@@ -23,6 +25,13 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <Dashboard />
   
+  },
+
+  {
+
+    path: "/dashboard/post/create",
+    element: <PostCreator />
+
   },
 
   {
