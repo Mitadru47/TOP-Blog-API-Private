@@ -42,7 +42,7 @@ function Comments(props){
 
             <div className="comments-container">
 
-                <h2>Comments</h2>
+                <h2 id="comments-header">Comments</h2>
                 {props.comments.map((comment) => <Comment key={index} index={index++} comment={comment} />)}
             
             </div>

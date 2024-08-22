@@ -256,7 +256,7 @@ iframe{
 
 /* PostDetail.jsx */
 
-#post-detail-container, #comments-container, .comment, #comment-creator{
+#post-detail-container, .comments-container, .comment, #comment-creator{
   padding: 0 10px;
 }
 
@@ -312,6 +312,10 @@ iframe{
   font-size: 0.9rem;
 }
 
+#comments-header{
+  margin-bottom: 7.5px;
+}
+
 .comments-container{
 
   display: flex;
@@ -330,6 +334,7 @@ iframe{
   border-radius: 10px;
 
   padding: 5px 10px;
+  margin: 0px 10px;
 }
 
 .comment-details{

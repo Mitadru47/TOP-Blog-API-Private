@@ -14,8 +14,8 @@ function CommentCreator({ post, onSubmit }){
                     
                     <br></br>
                 
-                    <input type="text" name="username" placeholder="Username"></input>
-                    <input id="email-input" type="text" name="email" placeholder="Email"></input>
+                    <input type="text" name="username" value={post[0].author.username} readOnly></input>
+                    <input id="email-input" type="text" name="email" value={post[0].author.email} readOnly></input>
                     <input id="post-input" type="text" name="post"  value={post[0]._id} readOnly></input>
                 
                     <button id="submit-button" type="submit">Comment</button>
