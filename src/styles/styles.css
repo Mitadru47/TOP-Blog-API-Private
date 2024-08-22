@@ -6,6 +6,17 @@ body{
   font-family: "Patrick Hand", cursive;
 }
 
+iframe{
+
+  display: none;
+
+  padding: 25px;
+  margin: 50px 0;
+
+  border: 2px dotted black;
+  border-radius: 10px;
+}
+
 /* Header.jsx */
 
 #top-nav{
@@ -243,13 +254,134 @@ body{
   display: inline;
 }
 
-iframe{
+/* PostDetail.jsx */
 
-  display: none;
+#post-detail-container, #comments-container, .comment, #comment-creator{
+  padding: 0 10px;
+}
+
+#post-detail-container{
+
+  border: 1px solid gray;
+  border-radius: 10px;
 
   padding: 25px;
-  margin: 50px 0;
 
-  border: 2px dotted black;
+  display: flex;
+  flex-direction: column;
+
+  gap: 50px;
+}
+
+.post-title a{
+
+  text-decoration: none;
+  color: black;
+
+  font-size: 1.25rem;
+}
+
+.post-title a:hover{
+
+  text-decoration: underline;
+}
+
+.post-body{
+
+  padding-left: 2.5px;
+  font-size: 1rem;
+}
+
+.post-timestamp{
+
+  align-self: flex-end;
+  font-size: 0.9rem;
+}
+
+.comment{
+
+  display: flex;
+  gap: 5px;
+}
+
+.comment-username a{
+
+  text-decoration: none;
+  color: black;
+
+  font-style: italic;
+}
+
+.comment-username a:hover{
+  text-decoration: underline;
+}
+
+#no-comments{
+  padding-left: 10px;
+}
+
+#form-container form input, #form-container form textarea, #form-container form button{
+
+  border: 1px solid gray;
   border-radius: 10px;
+
+  padding: 7.5px;
+  margin: 1px;
+
+  font-family: "Patrick Hand", cursive;
+}
+
+#body-input{
+  margin-bottom: 0;
+}
+
+#email-input{
+  width: 150px;
+}
+
+#post-input{
+  width: 130px;
+}
+
+#submit-button{
+  background-color: white;
+}
+
+#submit-button:hover{
+
+  cursor: pointer;
+
+  background-color: black;
+  color: white;
+}
+
+#comment-details{
+
+  border: 1px solid gray;
+  border-radius: 10px;
+
+  padding: 25px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+#comment-header{
+  font-size: 1.5rem;
+}
+
+#comment-header a{
+
+  text-decoration: none;
+  color: black;
+}
+
+#comment-header a:hover{
+  text-decoration: underline;
+}
+
+#comment-detail-body{
+  padding-left: 10px;
 }

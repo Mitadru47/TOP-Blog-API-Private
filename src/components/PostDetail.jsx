@@ -1,6 +1,9 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
+import Comments from "./Comments";
+import CommentCreator  from "./CommentCreator";
+
 async function getPostDetailResponse(setPostDetailResponse){
 
     let { id } = useParams();
@@ -20,11 +23,38 @@ function PostDetail(){
 
     if(postDetailResponse){
  
+        const post = postDetailResponse.post;
+        const comments = postDetailResponse.comments;
+
         return(
 
-            <div>
-                
-                <div>{postDetailResponse.post[0].title}</div>
+            <div id="details">
+
+                <div id="post-detail-container">
+
+                    <div id="post-detail">
+
+                        <div className="post-title">
+                            <a href={"/dashboard" + post[0].url}>{post[0].title}</a>
+
+                        </div>
+
+                        <div className="post-body">{post[0].body}</div>
+
+                    </div>
+
+                    <div className="post-timestamp">{post[0].timestamp}</div>
+
+                </div>
+
+                <Comments comments={comments} />
+
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+            
+                <CommentCreator post={post} />
 
             </div>
         );
