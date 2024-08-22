@@ -43,7 +43,23 @@ function PostDetail(){
 
                     </div>
 
-                    <div className="post-timestamp">{post[0].timestamp}</div>
+                    <div className="post-detail-footer">
+
+                        <div className="post-detail-tools">
+
+                            <div className="item-edit">
+                                <a href="">Edit</a>
+                            </div>
+
+                            <div className="item-delete">
+                                <a href="">Delete</a>
+                            </div>
+
+                        </div>
+
+                        <div className="post-timestamp">{post[0].timestamp}</div>
+
+                    </div>
 
                 </div>
 

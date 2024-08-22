@@ -292,13 +292,47 @@ iframe{
   font-size: 1rem;
 }
 
+.post-detail-footer{
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-detail-tools{
+
+  display: flex;
+  gap: 25px;
+
+  font-size: 0.9rem;
+}
+
 .post-timestamp{
 
   align-self: flex-end;
   font-size: 0.9rem;
 }
 
+.comments-container{
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+}
+
 .comment{
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border: 2px dashed black;
+  border-radius: 10px;
+
+  padding: 5px 10px;
+}
+
+.comment-details{
 
   display: flex;
   gap: 5px;
@@ -314,6 +348,14 @@ iframe{
 
 .comment-username a:hover{
   text-decoration: underline;
+}
+
+.comment-tools{
+
+  display: flex;
+  gap: 25px;
+
+  font-size: 0.9rem;
 }
 
 #no-comments{

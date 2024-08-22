@@ -6,13 +6,28 @@ function Comment({ comment }){
 
         <div className="comment">
         
-            <div className="comment-username">
-                <a href={"/dashboard" + comment.url}>{comment.username}:</a>
-        
+            <div className="comment-details">
+
+                <div className="comment-username">
+                    <a href={"/dashboard" + comment.url}>{comment.username}:</a>
+            
+                </div>
+            
+                <div className="comment-body">{comment.body}</div>
+
             </div>
-        
-            <div className="comment-body">{comment.body}</div>
-            <br></br>
+
+            <div className="comment-tools">
+
+                <div className="item-edit">
+                    <a href="">Edit</a>
+                </div>
+
+                <div className="item-delete">
+                    <a href="">Delete</a>
+                </div>
+
+            </div>
 
         </div>
     );
@@ -25,7 +40,7 @@ function Comments(props){
         let index = 0;
         return(
 
-            <div id="comments-container">
+            <div className="comments-container">
 
                 <h2>Comments</h2>
                 {props.comments.map((comment) => <Comment key={index} index={index++} comment={comment} />)}
