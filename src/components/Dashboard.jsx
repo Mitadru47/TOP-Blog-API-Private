@@ -40,7 +40,7 @@ function ListItem(props){
             <div className="list-item-tools">
 
                 <div className="item-edit">
-                    <a href="">Edit</a>
+                    <a href={"/dashboard" + props.post.url + "/edit"}>Edit</a>
                 </div>
 
                 <div className="item-delete">

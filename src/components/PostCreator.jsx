@@ -8,10 +8,10 @@ async function getUser(setUserResponse){
         .then((response) => response.json())
         .then((responseBody) => setUserResponse(responseBody))
 
-        .catach((error) => { console.log(error); })
+        .catch((error) => { console.log(error); })
 }
 
-function PostCreator(){
+function PostCreator(props){
 
     const [userResponse, setUserResponse] = useState();
     useEffect(() => { getUser(setUserResponse); }, []);
@@ -24,12 +24,12 @@ function PostCreator(){
 
                 <div id="form-container">
 
-                    <form target="status" action="http://localhost:3000/dashboard/post/create" method="POST">
+                    <form action="http://localhost:3000/dashboard/post/create" method="POST">
 
-                        <input type="text" name="title" id="title" placeholder="title"/>
+                        <input type="text" name="title" id="title" placeholder="title" defaultValue={props.postDetailResponse.post[0].title}/>
                         <br></br>
 
-                        <textarea rows="15" cols="150" type="text" name="body" id="body" placeholder="body"/>
+                        <textarea rows="15" cols="150" type="text" name="body" id="body" placeholder="body" defaultValue={props.postDetailResponse.post[0].body}/>
                         <br></br>
 
                         <input type="text" name="timestamp" id="timestamp" value={new Date()} readOnly/>
@@ -37,15 +37,12 @@ function PostCreator(){
 
                         <br></br>
                         <br></br>
-
-                        
+     
                         <button type="submit" id="submit-button">Create Post</button>
 
                     </form>
 
                 </div>
-
-                <iframe id="status" name="status"></iframe>
                 
             </div>
         );

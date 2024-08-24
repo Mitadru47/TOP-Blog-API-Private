@@ -48,7 +48,7 @@ function PostDetail(){
                         <div className="post-detail-tools">
 
                             <div className="item-edit">
-                                <a href="">Edit</a>
+                                <a href={"/dashboard" + post[0].url + "/edit"}>Edit</a>
                             </div>
 
                             <div className="item-delete">
