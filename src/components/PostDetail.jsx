@@ -52,7 +52,7 @@ function PostDetail(){
                             </div>
 
                             <div className="item-delete">
-                                <a href="">Delete</a>
+                                <a href={"/dashboard" + post[0].url + "/delete"}>Delete</a>
                             </div>
 
                         </div>

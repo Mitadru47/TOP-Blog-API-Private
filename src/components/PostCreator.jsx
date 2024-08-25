@@ -38,7 +38,10 @@ function PostCreator(props){
                         <br></br>
                         <br></br>
      
-                        <button type="submit" id="submit-button">Create Post</button>
+                        <input type="text" name="id" id="id" defaultValue={props.postDetailResponse.post[0].id} hidden/>
+
+                        {props.postDetailResponse.post[0].id ? 
+                        <button type="submit" id="submit-button">Update Post</button> : <button type="submit" id="submit-button">Create Post</button>}
 
                     </form>
 

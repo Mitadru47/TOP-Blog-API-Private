@@ -451,3 +451,44 @@ iframe{
 #timestamp{
   width: 280px;
 }
+
+/* PostDelete.jsx */
+
+#delete-dialog{
+  padding: 10px;
+}
+
+#delete-message{
+  font-size: 1.25rem;
+}
+
+.delete-info{
+  
+  font-size: 0.9rem;
+  padding-left: 10px;
+}
+
+#delete-button, #cancel-button{
+
+  color: black;
+  text-decoration: none;
+
+  font-size: 0.9rem;
+  background-color: white;
+
+  border: 2px solid grey;
+  border-radius: 10px;
+
+  margin-left: 5px;
+  padding: 5px 10px;
+
+  font-family: "Patrick Hand", cursive;
+}
+
+#delete-button:hover, #cancel-button:hover{
+
+  cursor: pointer;
+
+  background-color: black;
+  color: white;
+}

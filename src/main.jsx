@@ -13,6 +13,8 @@ import PostDetail from "./components/PostDetail.jsx";
 import PostCreator from "./components/PostCreator.jsx";
 import PostEditor from "./components/PostEditor.jsx";
 
+import PostDelete from "./components/PostDelete.jsx";
+
 const router = createBrowserRouter([
 
   {
@@ -32,7 +34,7 @@ const router = createBrowserRouter([
   {
 
     path: "/dashboard/post/create",
-    element: <PostCreator />
+    element: <PostCreator postDetailResponse={{post: [{ id: "", title:"", body: "" }]}}/>
 
   },
 
@@ -44,8 +46,17 @@ const router = createBrowserRouter([
   },
 
   {
+
     path: "/dashboard/post/:id/edit",
     element: <PostEditor />
+
+  },
+
+  {
+
+    path: "/dashboard/post/:id/delete",
+    element: <PostDelete />
+
   }
 
 ]);

@@ -44,7 +44,7 @@ function ListItem(props){
                 </div>
 
                 <div className="item-delete">
-                    <a href="">Delete</a>
+                    <a href={"/dashboard" + props.post.url + "/delete"}>Delete</a>
                 </div>
 
                 <div className="item-publish-status-container">
