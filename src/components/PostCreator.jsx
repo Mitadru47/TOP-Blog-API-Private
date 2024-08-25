@@ -43,6 +43,9 @@ function PostCreator(props){
                         {props.postDetailResponse.post[0].id ? 
                         <button type="submit" id="submit-button">Update Post</button> : <button type="submit" id="submit-button">Create Post</button>}
 
+                        {props.postDetailResponse.post[0].id ? 
+                        <a id="cancel-button" href={"/dashboard" + props.postDetailResponse.post[0].url}>Cancel</a> : <a id="cancel-button" href={"/dashboard"}>Cancel</a>}
+
                     </form>
 
                 </div>
