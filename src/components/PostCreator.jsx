@@ -53,6 +53,9 @@ function PostCreator(props){
             </div>
         );
     }
+
+    else
+        return <div className="loader">Loading Post Creator/Editor...</div>;
 }
 
 export default PostCreator;

@@ -17,6 +17,10 @@ iframe{
   border-radius: 10px;
 }
 
+.loader{
+  padding-left: 10px;
+}
+
 /* Header.jsx */
 
 #top-nav{

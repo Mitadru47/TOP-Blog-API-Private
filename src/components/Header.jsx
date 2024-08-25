@@ -41,6 +41,9 @@ function Header(){
             </div>
         );
     }
+
+    else
+        return <div className="loader">Loading Header...</div>;
 }
 
 export default Header;

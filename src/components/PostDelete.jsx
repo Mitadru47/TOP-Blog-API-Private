@@ -57,6 +57,9 @@ function PostDelete(){
             </div>
         );
     }
+
+    else
+        return <div className="loader">Loading Post Delete Confirmation Dialog...</div>;
 }
 
 export default PostDelete;

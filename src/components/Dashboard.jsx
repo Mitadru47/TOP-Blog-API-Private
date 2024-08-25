@@ -111,6 +111,9 @@ function Dashboard(){
             </div>
         );
     }
+
+    else
+        return <div className="loader">Loading Dashboard...</div>;
 }
 
 export default Dashboard;
