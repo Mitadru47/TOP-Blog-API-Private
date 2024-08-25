@@ -20,11 +20,11 @@ function Comment({ comment }){
             <div className="comment-tools">
 
                 <div className="item-edit">
-                    <a href="">Edit</a>
+                    <a href={"/dashboard" + comment.url + "/edit"}>Edit</a>
                 </div>
 
                 <div className="item-delete">
-                    <a href="">Delete</a>
+                    <a href={"/dashboard" + comment.url + "/delete"}>Delete</a>
                 </div>
 
             </div>

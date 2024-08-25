@@ -498,3 +498,17 @@ iframe{
   background-color: black;
   color: white;
 }
+
+/* CommentDetail.jsx */
+
+#comment-header-container{
+
+  display: flex;
+  justify-content: space-between;
+}
+
+#comment-tools{
+
+  display: flex;
+  gap: 25px;
+}

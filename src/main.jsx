@@ -14,6 +14,7 @@ import PostCreator from "./components/PostCreator.jsx";
 import PostEditor from "./components/PostEditor.jsx";
 
 import PostDelete from "./components/PostDelete.jsx";
+import CommentDetail from "./components/CommentDetail.jsx";
 
 const router = createBrowserRouter([
 
@@ -57,6 +58,13 @@ const router = createBrowserRouter([
     path: "/dashboard/post/:id/delete",
     element: <PostDelete />
 
+  },
+
+  {
+
+    path: "/dashboard/post/:postid/comment/:commentid",
+    element: <CommentDetail />
+    
   }
 
 ]);
