@@ -28,6 +28,9 @@ function PostEditor() {
             </div>
         );
     }
+
+    else
+        return <div className="loader">Loading Post Editor...</div>;
 }
 
 export default PostEditor

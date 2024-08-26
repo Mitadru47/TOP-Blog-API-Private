@@ -70,7 +70,7 @@ function PostDetail(){
                 <br></br>
                 <br></br>
             
-                <CommentCreator post={post} />
+                <CommentCreator post={post[0]} comment={[{ _id: "", body: "", username: "", email: "" }]}/>
 
             </div>
         );
