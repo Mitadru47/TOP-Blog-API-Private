@@ -51,6 +51,14 @@ iframe{
 
 /* Header.jsx - Section B */
 
+#header-info-container{
+
+  display: flex;
+  align-items: center;
+
+  gap: 25px;
+}
+
 #header-info{
 
   display: flex;
@@ -59,6 +67,31 @@ iframe{
   align-items: end;
   
   font-size: 1.1rem;
+}
+
+#tool-container{
+
+  display: flex;
+  gap: 10px;
+}
+
+#author-container a{
+
+  font-size: 1.25rem;
+
+  text-decoration: none;
+  color: black;
+
+  border: 2px dashed black;
+  border-radius: 10px;
+
+  padding: 7.5px 17px;
+}
+
+#author-container a:hover{
+
+  border: 2px solid black;
+  text-decoration: underline;
 }
 
 #create-post{
@@ -73,6 +106,26 @@ iframe{
 
 #post-count{
   margin: 0;
+}
+
+/* UserDetail.jsx */
+
+#author-details{
+
+  border: 1px solid black;
+  border-radius: 10px;
+
+  padding: 25px;
+}
+
+#author-details-palette{
+
+  display: flex;
+  justify-content: space-between;
+}
+
+#authorName{
+  font-size: 1.4rem;
 }
 
 /* Dashboard.jsx */

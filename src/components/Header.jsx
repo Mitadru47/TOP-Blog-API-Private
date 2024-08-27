@@ -26,14 +26,26 @@ function Header(){
                     <a id="header" href="/">Blog API</a>
                 </div>
                 
-                <div id="header-info">
+                <div id="header-info-container">
+                   
+                    <div id="header-info">
 
-                    <div id="tool-container"> 
-                        <a id="create-post" href="/dashboard/post/create">Create</a>
+                        <div id="tool-container">
+
+                            <div id="create-post-container">
+                                <a id="create-post" href="/dashboard/post/create">Create</a>
+                            </div>
+
+                        </div>
+
+                        <div id="post-count-container"> 
+                            <p id="post-count">Total Posts: {dashboardResponse.posts.length}</p>
+                        </div>
+
                     </div>
 
-                    <div id="post-count-container"> 
-                        <p id="post-count">Total Posts: {dashboardResponse.posts.length}</p>
+                    <div id="author-container">
+                        <a id="author" href={"/dashboard" + dashboardResponse.author[0].url}>{dashboardResponse.author[0].username}</a>
                     </div>
 
                 </div>

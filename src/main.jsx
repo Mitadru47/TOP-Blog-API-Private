@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Header from "./components/Header.jsx";
 import Dashboard from "./components/Dashboard.jsx";
 
+import UserDetail from "./components/UserDetail.jsx";
 import PostDetail from "./components/PostDetail.jsx";
 
 import PostCreator from "./components/PostCreator.jsx";
@@ -32,6 +33,13 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <Dashboard />
   
+  },
+
+  {
+
+    path: "/dashboard/user",
+    element: <UserDetail />
+
   },
 
   {
