@@ -8,7 +8,7 @@ function CommentCreator({ post, comment }){
 
             <div id="form-container">
 
-                <form target="status" action={"http://localhost:3000/dashboard/post/" + post._id + "/comment/create"} method="POST">
+                <form target={!(comment._id) && "status"} action={"http://localhost:3000/dashboard/post/" + post._id + "/comment/create"} method="POST">
                     
                     <textarea id="body-input" name="body" cols="150" rows="4" placeholder="Comment" defaultValue={comment.body}></textarea>
                     
@@ -16,23 +16,22 @@ function CommentCreator({ post, comment }){
                 
                     {
                         (comment.username) ? 
-                            <input type="text" name="username" value={comment.username} readOnly></input> 
-                            : <input type="text" name="username" value={post.author.username} readOnly></input>
+                            <input type="text" name="username" defaultValue={comment.username} readOnly></input> 
+                            : <input type="text" name="username" defaultValue={post.author.username} readOnly></input>
                     }
 
                     {
                         (comment.email) ? 
-                            <input id="email-input" type="text" name="email" value={comment.email} readOnly></input>
-                            : <input id="email-input" type="text" name="email" value={post.author.email} readOnly></input>
+                            <input id="email-input" type="text" name="email" defaultValue={comment.email} readOnly></input>
+                            : <input id="email-input" type="text" name="email" defaultValue={post.author.email} readOnly></input>
                     }
 
                     {
                         (comment._id) &&
-                            <input id="comment-input" type="text" name="post"  value={comment._id} hidden></input>  
+                            <input id="comment-input" type="text" name="comment"  defaultValue={comment._id} hidden></input>  
                     }
 
-                    <input id="post-input" type="text" name="post"  value={post._id} readOnly></input>
-
+                    <input id="post-input" type="text" name="post"  defaultValue={post._id} readOnly></input>
 
                     {
                         (comment._id) ? 
@@ -49,7 +48,7 @@ function CommentCreator({ post, comment }){
                 </form>
 
                 <br></br>
-                    
+
                 <iframe id="status" name="status"></iframe>
 
             </div>

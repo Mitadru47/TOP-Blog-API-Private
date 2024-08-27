@@ -12,11 +12,11 @@ import PostDetail from "./components/PostDetail.jsx";
 
 import PostCreator from "./components/PostCreator.jsx";
 import PostEditor from "./components/PostEditor.jsx";
-
 import PostDelete from "./components/PostDelete.jsx";
 
 import CommentDetail from "./components/CommentDetail.jsx";
 import CommentEditor from "./components/CommentEditor.jsx";
+import CommentDelete from "./components/CommentDelete.jsx";
 
 const router = createBrowserRouter([
 
@@ -74,6 +74,12 @@ const router = createBrowserRouter([
     path: "/dashboard/post/:postid/comment/:commentid/edit",
     element: <CommentEditor />
 
+  },
+
+  {
+
+    path: "/dashboard/post/:postid/comment/:commentid/delete",
+    element: <CommentDelete />
   }
 
 ]);
