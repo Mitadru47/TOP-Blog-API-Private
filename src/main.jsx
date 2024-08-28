@@ -9,8 +9,9 @@ import Header from "./components/Header.jsx";
 import Dashboard from "./components/Dashboard.jsx";
 
 import UserDetail from "./components/UserDetail.jsx";
-import PostDetail from "./components/PostDetail.jsx";
+import UserEditor from "./components/UserEditor.jsx";
 
+import PostDetail from "./components/PostDetail.jsx";
 import PostCreator from "./components/PostCreator.jsx";
 import PostEditor from "./components/PostEditor.jsx";
 import PostDelete from "./components/PostDelete.jsx";
@@ -39,6 +40,13 @@ const router = createBrowserRouter([
 
     path: "/dashboard/user",
     element: <UserDetail />
+
+  },
+
+  {
+
+    path: "/dashboard/user/edit",
+    element: <UserEditor />
 
   },
 
