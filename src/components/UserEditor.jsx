@@ -1,6 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
+import Header from "./Header";
+
 async function getUser(setUserResponse){
 
     fetch("http://localhost:3000/dashboard/user", { mode: "cors" })
@@ -20,32 +22,38 @@ function UserEditor(props){
 
         return(
 
-            <div id="user-editor">
+            <div>
 
-                <div id="form-container">
+                <Header />
 
-                    <form action="http://localhost:3000/dashboard/user/edit" method="POST">
+                <div id="user-editor">
 
-                        <input type="text" name="firstName" id="firstname" defaultValue={userResponse[0].firstName}/>
-                        <input type="text" name="lastName" id="lastname" defaultValue={userResponse[0].lastName}/>
+                    <div id="form-container">
 
-                        <input type="text" name="email" id="email" defaultValue={userResponse[0].email}/>
-                       
-                        <br></br>
+                        <form action="http://localhost:3000/dashboard/user/edit" method="POST">
 
-                        <input type="text" name="username" id="username" defaultValue={userResponse[0].username}/>
-                        <input type="text" name="password" id="password" defaultValue={userResponse[0].password}/>
+                            <input type="text" name="firstName" id="firstname" defaultValue={userResponse[0].firstName}/>
+                            <input type="text" name="lastName" id="lastname" defaultValue={userResponse[0].lastName}/>
 
-                        <br></br>
-                        <br></br>
+                            <input type="text" name="email" id="email" defaultValue={userResponse[0].email}/>
+                        
+                            <br></br>
 
-                        <input type="text" name="id" id="id" defaultValue={userResponse[0].id} hidden/>
-                         
-                        <button type="submit" id="submit-button">Update User Details</button>
-                        <a id="cancel-button" href={"/dashboard" + userResponse[0].url}>Cancel</a>
+                            <input type="text" name="username" id="username" defaultValue={userResponse[0].username}/>
+                            <input type="text" name="password" id="password" defaultValue={userResponse[0].password}/>
 
-                    </form>
+                            <br></br>
+                            <br></br>
 
+                            <input type="text" name="id" id="id" defaultValue={userResponse[0].id} hidden/>
+                            
+                            <button type="submit" id="submit-button">Update User Details</button>
+                            <a id="cancel-button" href={"/dashboard" + userResponse[0].url}>Cancel</a>
+
+                        </form>
+
+                    </div>
+                    
                 </div>
                 
             </div>

@@ -1,7 +1,8 @@
 import React from "react";
 import PostDetail from "./PostDetail";
 
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import Header from "./Header";
 
 async function getPostDetailResponse(setPostDetailResponse){
 
@@ -24,35 +25,41 @@ function PostDelete(){
 
         return(
 
-            <div id="delete-container">
+            <div>
 
-                <div id="delete-dialog">
-                
-                    <div id="delete-message">Are you sure?</div>
+                <Header />
 
-                    <br></br>
+                <div id="delete-container">
 
-                    <div id="delete-info-lines">
+                    <div id="delete-dialog">
+                    
+                        <div id="delete-message">Are you sure?</div>
 
-                        <div className="delete-info">All info pertaining to the following post will be permanently erased.</div>
-                        <div className="delete-info">All comment(s) & info pertaining to the comment poster(s) associated with this post will also be permanently erased.</div>
+                        <br></br>
+
+                        <div id="delete-info-lines">
+
+                            <div className="delete-info">All info pertaining to the following post will be permanently erased.</div>
+                            <div className="delete-info">All comment(s) & info pertaining to the comment poster(s) associated with this post will also be permanently erased.</div>
+
+                        </div>
+
+                        <br></br>
+
+                        <form action={"http://localhost:3000/dashboard" + postDetailResponse.post[0].url + "/delete"} method="POST">
+
+                            <button id="delete-button" type="submit">Delete</button>
+                            <a id="cancel-button" href={"/dashboard" + postDetailResponse.post[0].url}>Cancel</a>
+
+                        </form>
 
                     </div>
 
                     <br></br>
 
-                    <form action={"http://localhost:3000/dashboard" + postDetailResponse.post[0].url + "/delete"} method="POST">
-
-                        <button id="delete-button" type="submit">Delete</button>
-                        <a id="cancel-button" href={"/dashboard" + postDetailResponse.post[0].url}>Cancel</a>
-
-                    </form>
+                    <PostDetail headerless={true} />
 
                 </div>
-
-                <br></br>
-
-                <PostDetail />
 
             </div>
         );

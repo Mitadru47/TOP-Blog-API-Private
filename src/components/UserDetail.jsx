@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Header from "./Header";
 
 async function getUserDetail(setUserDetailResponse){
 
@@ -18,27 +19,33 @@ function UserDetail(){
         
         return(
 
-            <div id="author-details">
-                
-                <div id="author-details-palette">
+            <div>
 
-                    <div id="authorName"><strong>Author:</strong><br></br>{userDetailResponse[0].firstName + " " + userDetailResponse[0].lastName}</div>
+                <Header />
+
+                <div id="author-details">
                     
-                    <div className="item-edit">
-                        <a href={"/dashboard" + userDetailResponse[0].url + "/edit"}>Edit</a>
+                    <div id="author-details-palette">
+
+                        <div id="authorName"><strong>Author:</strong><br></br>{userDetailResponse[0].firstName + " " + userDetailResponse[0].lastName}</div>
+                        
+                        <div className="item-edit">
+                            <a href={"/dashboard" + userDetailResponse[0].url + "/edit"}>Edit</a>
+                        </div>
+
                     </div>
 
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+
+                    <div><strong>Alias:</strong> {userDetailResponse[0].username}</div>
+                    <div><strong>Email:</strong> {userDetailResponse[0].email}</div>
+
                 </div>
-
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-
-                <div><strong>Alias:</strong> {userDetailResponse[0].username}</div>
-                <div><strong>Email:</strong> {userDetailResponse[0].email}</div>
-
+                
             </div>
         );
     }

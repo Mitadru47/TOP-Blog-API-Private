@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
 import CommentDetail from "./CommentDetail";
+import Header from "./Header";
 
 async function getCommentDetail(setCommentDetailResponse){
 
@@ -24,34 +25,40 @@ function CommentDelete(){
 
         return(
 
-            <div id="delete-container">
+            <div>
 
-                <div id="delete-dialog">
+                <Header />
 
-                    <div id="delete-message">Are you sure?</div>
+                <div id="delete-container">
 
-                    <br></br>
+                    <div id="delete-dialog">
 
-                    <div id="delete-info-lines">
+                        <div id="delete-message">Are you sure?</div>
 
-                    <div className="delete-info">All info pertaining to the following comment will be permanently erased.</div>
+                        <br></br>
+
+                        <div id="delete-info-lines">
+
+                        <div className="delete-info">All info pertaining to the following comment will be permanently erased.</div>
+
+                        </div>
+
+                        <br></br>
+
+                        <form action={"http://localhost:3000/dashboard" + commentDetailResponse.comment.url + "/delete"} method="POST">
+
+                            <button id="delete-button" type="submit">Delete</button>
+                            <a id="cancel-button" href={"/dashboard" + commentDetailResponse.comment.url}>Cancel</a>
+
+                        </form>
 
                     </div>
 
                     <br></br>
 
-                    <form action={"http://localhost:3000/dashboard" + commentDetailResponse.comment.url + "/delete"} method="POST">
-
-                        <button id="delete-button" type="submit">Delete</button>
-                        <a id="cancel-button" href={"/dashboard" + commentDetailResponse.comment.url}>Cancel</a>
-
-                    </form>
+                    <CommentDetail headerless={true}/>
 
                 </div>
-
-                <br></br>
-
-                <CommentDetail />
 
             </div>
         );

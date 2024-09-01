@@ -20,7 +20,16 @@ import CommentDetail from "./components/CommentDetail.jsx";
 import CommentEditor from "./components/CommentEditor.jsx";
 import CommentDelete from "./components/CommentDelete.jsx";
 
+import Login from "./components/LogIn.jsx";
+
 const router = createBrowserRouter([
+
+  {
+
+    path: "/login",
+    element: <Login />
+
+  },
 
   {
 
@@ -60,7 +69,7 @@ const router = createBrowserRouter([
   {
 
     path: "/dashboard/post/:id",
-    element: <PostDetail />
+    element: <PostDetail headerless={ false }/>
 
   },
 
@@ -81,7 +90,7 @@ const router = createBrowserRouter([
   {
 
     path: "/dashboard/post/:postid/comment/:commentid",
-    element: <CommentDetail />
+    element: <CommentDetail headerless={ false }/>
     
   },
 
@@ -103,8 +112,6 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
 
   <React.StrictMode>
-
-    <Header />
     <RouterProvider router={router} />
 
   </React.StrictMode>

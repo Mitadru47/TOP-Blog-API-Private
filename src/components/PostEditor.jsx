@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import PostCreator from "./PostCreator";
+import Header from "./Header";
 
 async function getPost(setPost){
 
@@ -25,6 +26,7 @@ function PostEditor() {
         return(
             <div>
                 <PostCreator postDetailResponse={postDetailResponse}/>
+                
             </div>
         );
     }

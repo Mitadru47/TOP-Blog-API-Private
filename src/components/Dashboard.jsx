@@ -1,6 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
+import Header from "./Header";
+
 async function getDashboard(setDashboardResponse){
 
     fetch("http://localhost:3000/dashboard", { mode: "cors" })
@@ -50,7 +52,7 @@ function ListItem(props){
                 <div className="item-publish-status-container">
 
                     <div className="item-publish-status">
-                         
+                        
                         {(props.post.publishStatus ? 
                         
                             <form target="status" action={"http://localhost:3000/dashboard/post/" + props.post._id + "/publishStatus/unpublish"} method="POST">
@@ -103,10 +105,16 @@ function Dashboard(){
 
         return(
             
-            <div id="list-container">
+            <div>
 
-                {dashboardResponse.posts.map((post) => <ListItem key={index} index={index++} post={post} />)}               
-                <iframe id="status" name="status"></iframe>
+                <Header />
+
+                <div id="list-container">
+
+                    {dashboardResponse.posts.map((post) => <ListItem key={index} index={index++} post={post} />)}               
+                    <iframe id="status" name="status"></iframe>
+
+                </div>
 
             </div>
         );

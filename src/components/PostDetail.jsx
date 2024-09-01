@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import Comments from "./Comments";
 import CommentCreator  from "./CommentCreator";
 
+import Header from "./Header";
+
 async function getPostDetailResponse(setPostDetailResponse){
 
     let { id } = useParams();
@@ -16,7 +18,7 @@ async function getPostDetailResponse(setPostDetailResponse){
         .catch((error) => console.log(error));
 }
 
-function PostDetail(){
+function PostDetail({ headerless }){
 
     const [postDetailResponse, setPostDetailResponse] = React.useState();
     getPostDetailResponse(setPostDetailResponse);
@@ -28,50 +30,56 @@ function PostDetail(){
 
         return(
 
-            <div id="details">
+            <div>
 
-                <div id="post-detail-container">
+                { !headerless && <Header />}
 
-                    <div id="post-detail">
+                <div id="details">
 
-                        <div className="post-title">
-                            <a href={"/dashboard" + post[0].url}>{post[0].title}</a>
+                    <div id="post-detail-container">
+
+                        <div id="post-detail">
+
+                            <div className="post-title">
+                                <a href={"/dashboard" + post[0].url}>{post[0].title}</a>
+
+                            </div>
+
+                            <div className="post-body">{post[0].body}</div>
 
                         </div>
 
-                        <div className="post-body">{post[0].body}</div>
+                        <div className="post-detail-footer">
 
-                    </div>
+                            <div className="post-detail-tools">
 
-                    <div className="post-detail-footer">
+                                <div className="item-edit">
+                                    <a href={"/dashboard" + post[0].url + "/edit"}>Edit</a>
+                                </div>
 
-                        <div className="post-detail-tools">
+                                <div className="item-delete">
+                                    <a href={"/dashboard" + post[0].url + "/delete"}>Delete</a>
+                                </div>
 
-                            <div className="item-edit">
-                                <a href={"/dashboard" + post[0].url + "/edit"}>Edit</a>
                             </div>
 
-                            <div className="item-delete">
-                                <a href={"/dashboard" + post[0].url + "/delete"}>Delete</a>
-                            </div>
+                            <div className="post-timestamp">{post[0].timestamp}</div>
 
                         </div>
 
-                        <div className="post-timestamp">{post[0].timestamp}</div>
-
                     </div>
+
+                    <Comments comments={comments} />
+
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                
+                    <CommentCreator post={post[0]} comment={[{ _id: "", body: "", username: "", email: "" }]}/>
 
                 </div>
-
-                <Comments comments={comments} />
-
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-            
-                <CommentCreator post={post[0]} comment={[{ _id: "", body: "", username: "", email: "" }]}/>
-
+                
             </div>
         );
     }

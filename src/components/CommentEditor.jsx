@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
 import CommentCreator from "./CommentCreator";
+import Header from "./Header";
 
 async function getCommentDetail(setCommentDetailResponse){
 
@@ -25,7 +26,10 @@ function CommentEditor(){
         return(
 
             <div>
+
+                <Header />
                 <CommentCreator post={commentDetailResponse.comment.post} comment={commentDetailResponse.comment}/>    
+            
             </div>
         );
 

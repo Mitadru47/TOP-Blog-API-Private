@@ -1,6 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
+import Header from "./Header";
+
 async function getUser(setUserResponse){
 
     fetch("http://localhost:3000/dashboard/user", { mode: "cors" })
@@ -20,36 +22,42 @@ function PostCreator(props){
 
         return(
 
-            <div id="post-creator">
+            <div>
 
-                <div id="form-container">
+                <Header />
 
-                    <form action="http://localhost:3000/dashboard/post/create" method="POST">
+                <div id="post-creator">
 
-                        <input type="text" name="title" id="title" placeholder="title" defaultValue={props.postDetailResponse.post[0].title}/>
-                        <br></br>
+                    <div id="form-container">
 
-                        <textarea rows="15" cols="150" type="text" name="body" id="body" placeholder="body" defaultValue={props.postDetailResponse.post[0].body}/>
-                        <br></br>
+                        <form action="http://localhost:3000/dashboard/post/create" method="POST">
 
-                        <input type="text" name="timestamp" id="timestamp" value={new Date()} readOnly/>
-                        <input type="text" name="author" id="author" value={userResponse[0].id} readOnly/>
+                            <input type="text" name="title" id="title" placeholder="title" defaultValue={props.postDetailResponse.post[0].title}/>
+                            <br></br>
 
-                        <br></br>
-                        <br></br>
-     
-                        <input type="text" name="id" id="id" defaultValue={props.postDetailResponse.post[0].id} hidden/>
+                            <textarea rows="15" cols="150" type="text" name="body" id="body" placeholder="body" defaultValue={props.postDetailResponse.post[0].body}/>
+                            <br></br>
 
-                        {props.postDetailResponse.post[0].id ? 
-                        <button type="submit" id="submit-button">Update Post</button> : <button type="submit" id="submit-button">Create Post</button>}
+                            <input type="text" name="timestamp" id="timestamp" value={new Date()} readOnly/>
+                            <input type="text" name="author" id="author" value={userResponse[0].id} readOnly/>
 
-                        {props.postDetailResponse.post[0].id ? 
-                        <a id="cancel-button" href={"/dashboard" + props.postDetailResponse.post[0].url}>Cancel</a> : <a id="cancel-button" href={"/dashboard"}>Cancel</a>}
+                            <br></br>
+                            <br></br>
+        
+                            <input type="text" name="id" id="id" defaultValue={props.postDetailResponse.post[0].id} hidden/>
 
-                    </form>
+                            {props.postDetailResponse.post[0].id ? 
+                            <button type="submit" id="submit-button">Update Post</button> : <button type="submit" id="submit-button">Create Post</button>}
 
+                            {props.postDetailResponse.post[0].id ? 
+                            <a id="cancel-button" href={"/dashboard" + props.postDetailResponse.post[0].url}>Cancel</a> : <a id="cancel-button" href={"/dashboard"}>Cancel</a>}
+
+                        </form>
+
+                    </div>
+                    
                 </div>
-                
+
             </div>
         );
     }
