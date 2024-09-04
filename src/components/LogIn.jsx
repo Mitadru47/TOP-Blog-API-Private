@@ -1,5 +1,33 @@
 import React from "react";
 
+function handleSubmit(event){
+
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+
+    const plainFormData = Object.fromEntries(data.entries());
+	const formDataJsonString = JSON.stringify(plainFormData);
+
+    fetch("http://localhost:3000/dashboard/login", { 
+        
+            mode: "cors", 
+            method: "POST", 
+            
+            headers: {
+
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }, 
+    
+            body: formDataJsonString 
+        })
+
+        .then((response) => response.json())
+        .then((responseBody) => console.log(responseBody))
+
+        .catch((error) => console.log(error));
+}
+
 function Login(){
 
     return(
@@ -14,7 +42,7 @@ function Login(){
 
                 <div id="login-form-container">
 
-                    <form action="http://localhost:3000/dashboard/login" method="POST">
+                    <form onSubmit={handleSubmit}>
 
                         <div id="login-info">Author Mode - Sign In Required*</div>
 
