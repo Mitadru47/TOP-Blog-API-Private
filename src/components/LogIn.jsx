@@ -34,6 +34,7 @@ function handleSubmit(event){
                 message.classList.add("display-off");
 
                 setLocalStorage(responseBody);
+                window.location.href = "http://localhost:5174/dashboard";
             }
 
             else{

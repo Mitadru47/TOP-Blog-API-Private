@@ -1,10 +1,10 @@
 import moment from "moment";
 
-export function setLocalStorage (responseObj) {
+export function setLocalStorage(responseObj) {
 
     const expiresIn = moment().add(responseObj.expiresIn.split(" ")[0], responseObj.expiresIn.split(" ")[1]);
    
-    localStorage.setItem("token", responseObj.token);
+    localStorage.setItem("token", responseObj.token.token);
     localStorage.setItem("expiresIn", JSON.stringify(expiresIn.valueOf()));
 }
 
