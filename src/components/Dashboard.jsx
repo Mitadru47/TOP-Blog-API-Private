@@ -1,10 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
+import Login from "./LogIn";
 import Header from "./Header";
 
-async function getDashboard(setDashboardResponse){
+import { isLoggedIn } from "../utils/auth";
 
+async function getDashboard(setDashboardResponse){
+    
     fetch("http://localhost:3000/dashboard", { mode: "cors" })
 
         .then((response) => response.json())
@@ -96,32 +99,38 @@ function ListItem(props){
 
 function Dashboard(){
 
-    let  index = 0;
+    if(isLoggedIn()){
 
-    const [ dashboardResponse, setDashboardResponse ] = useState();
-    useEffect(() => { getDashboard(setDashboardResponse); });
-    
-    if(dashboardResponse){
+        let  index = 0;
 
-        return(
-            
-            <div>
+        const [ dashboardResponse, setDashboardResponse ] = useState();
+        useEffect(() => { getDashboard(setDashboardResponse); });
+        
+        if(dashboardResponse){
 
-                <Header />
+            return(
+                
+                <div>
 
-                <div id="list-container">
+                    <Header />
 
-                    {dashboardResponse.posts.map((post) => <ListItem key={index} index={index++} post={post} />)}               
-                    <iframe id="status" name="status"></iframe>
+                    <div id="list-container">
+
+                        {dashboardResponse.posts.map((post) => <ListItem key={index} index={index++} post={post} />)}               
+                        <iframe id="status" name="status"></iframe>
+
+                    </div>
 
                 </div>
+            );
+        }
 
-            </div>
-        );
+        else
+            return <div className="loader">Loading Dashboard...</div>;
     }
 
     else
-        return <div className="loader">Loading Dashboard...</div>;
+        return <Login />;
 }
 
 export default Dashboard;

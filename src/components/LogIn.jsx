@@ -1,4 +1,5 @@
 import React from "react";
+import { setLocalStorage } from "../utils/auth";
 
 function handleSubmit(event){
 
@@ -32,8 +33,7 @@ function handleSubmit(event){
                 message.classList.remove("display-on");
                 message.classList.add("display-off");
 
-                console.log(responseBody);
-                
+                setLocalStorage(responseBody);
             }
 
             else{

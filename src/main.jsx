@@ -20,6 +20,24 @@ import CommentEditor from "./components/CommentEditor.jsx";
 import CommentDelete from "./components/CommentDelete.jsx";
 
 import Login from "./components/LogIn.jsx";
+import axios from 'axios';
+
+// API Request Interceptor
+axios.interceptors.request.use((config) => {
+
+    const token = localStorage.getItem("token");
+
+    console.log("axios " + token);
+    
+
+    if (token)
+      config.headers['Authorization'] = 'Bearer ' + token;
+    
+    return config;
+  },
+
+  (error) => { Promise.reject(error); }
+);
 
 const router = createBrowserRouter([
 
