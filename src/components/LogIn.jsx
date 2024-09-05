@@ -23,7 +23,27 @@ function handleSubmit(event){
         })
 
         .then((response) => response.json())
-        .then((responseBody) => console.log(responseBody))
+        .then((responseBody) => {
+        
+            if(!responseBody.message){
+
+                let message = document.getElementById("login-failed-info");
+
+                message.classList.remove("display-on");
+                message.classList.add("display-off");
+
+                console.log(responseBody);
+                
+            }
+
+            else{
+
+                let message = document.getElementById("login-failed-info");
+
+                message.classList.remove("display-off");
+                message.classList.add("display-on"); 
+            }
+        })
 
         .catch((error) => console.log(error));
 }
@@ -50,6 +70,10 @@ function Login(){
                         <input type="text" name="password" id="login-password" placeholder="Password"/>
 
                         <button type="submit" id="submit-button">Log in</button>
+
+                        <br></br>
+
+                        <div id="login-failed-info" className="display-off">Log in failed, Please try again!</div>
 
                     </form>
 

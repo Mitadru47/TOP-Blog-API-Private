@@ -93,6 +93,23 @@ iframe{
   padding-bottom: 10px;
 }
 
+#login-failed-info{
+
+  color: #800000;
+  font-size: 0.8rem;
+
+  padding: 10px;
+  padding-left: 20px;
+}
+
+.display-on{
+  display: block;
+}
+
+.display-off{
+  display: none;
+}
+
 #login-username, #login-password{
 
   border: 1px solid grey;
