@@ -53,8 +53,23 @@ function handleSubmit(event){
             .then((response) => response.json())
             .then((responseBody) => {
             
-                if(responseBody === "Success!")
+                if(responseBody === "Success!"){
+                
+                    let message = document.getElementById("post-failed-info");
+
+                    message.classList.remove("display-on");
+                    message.classList.add("display-off");
+
                     window.location.href = "http://localhost:5174/dashboard/user";
+                }
+
+                else{
+
+                    let message = document.getElementById("post-failed-info");
+    
+                    message.classList.remove("display-off");
+                    message.classList.add("display-on"); 
+                }
             })
 
             .catch((error) => console.log(error));
@@ -102,6 +117,8 @@ function UserEditor(){
                                 
                                 <button type="submit" id="submit-button">Update Author Details</button>
                                 <a id="cancel-button" href={"/dashboard" + userResponse[0].url}>Cancel</a>
+
+                                <div id="post-failed-info" className="display-off">Something went wrong. Please try again!</div>
 
                             </form>
 

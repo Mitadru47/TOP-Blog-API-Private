@@ -93,7 +93,7 @@ iframe{
   padding-bottom: 10px;
 }
 
-#login-failed-info{
+#login-failed-info, #post-failed-info{
 
   color: #800000;
   font-size: 0.8rem;
