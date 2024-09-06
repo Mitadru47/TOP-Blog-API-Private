@@ -1,11 +1,19 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
+import Login from "./LogIn";
 import Header from "./Header";
+
+import { isLoggedIn } from "../utils/auth";
 
 async function getUser(setUserResponse){
 
-    fetch("http://localhost:3000/dashboard/user", { mode: "cors" })
+    const headers = new Headers();
+
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', localStorage.getItem("token"));
+
+    fetch("http://localhost:3000/dashboard/user", { mode: "cors", headers: headers })
         
         .then((response) => response.json())
         .then((responseBody) => setUserResponse(responseBody))
@@ -15,53 +23,59 @@ async function getUser(setUserResponse){
 
 function UserEditor(props){
 
-    const [userResponse, setUserResponse] = useState();
-    useEffect(() => { getUser(setUserResponse); }, []);
+    if(isLoggedIn()){
 
-    if(userResponse){
+        const [userResponse, setUserResponse] = useState();
+        useEffect(() => { getUser(setUserResponse); }, []);
 
-        return(
+        if(userResponse){
 
-            <div>
+            return(
 
-                <Header />
+                <div>
 
-                <div id="user-editor">
+                    <Header />
 
-                    <div id="form-container">
+                    <div id="user-editor">
 
-                        <form action="http://localhost:3000/dashboard/user/edit" method="POST">
+                        <div id="form-container">
 
-                            <input type="text" name="firstName" id="firstname" defaultValue={userResponse[0].firstName}/>
-                            <input type="text" name="lastName" id="lastname" defaultValue={userResponse[0].lastName}/>
+                            <form action="http://localhost:3000/dashboard/user/edit" method="POST">
 
-                            <input type="text" name="email" id="email" defaultValue={userResponse[0].email}/>
-                        
-                            <br></br>
+                                <input type="text" name="firstName" id="firstname" defaultValue={userResponse[0].firstName}/>
+                                <input type="text" name="lastName" id="lastname" defaultValue={userResponse[0].lastName}/>
 
-                            <input type="text" name="username" id="username" defaultValue={userResponse[0].username}/>
-                            <input type="text" name="password" id="password" defaultValue={userResponse[0].password}/>
-
-                            <br></br>
-                            <br></br>
-
-                            <input type="text" name="id" id="id" defaultValue={userResponse[0].id} hidden/>
+                                <input type="text" name="email" id="email" defaultValue={userResponse[0].email}/>
                             
-                            <button type="submit" id="submit-button">Update User Details</button>
-                            <a id="cancel-button" href={"/dashboard" + userResponse[0].url}>Cancel</a>
+                                <br></br>
 
-                        </form>
+                                <input type="text" name="username" id="username" defaultValue={userResponse[0].username}/>
+                                <input type="text" name="password" id="password" defaultValue={userResponse[0].password}/>
 
+                                <br></br>
+                                <br></br>
+
+                                <input type="text" name="id" id="id" defaultValue={userResponse[0].id} hidden/>
+                                
+                                <button type="submit" id="submit-button">Update User Details</button>
+                                <a id="cancel-button" href={"/dashboard" + userResponse[0].url}>Cancel</a>
+
+                            </form>
+
+                        </div>
+                        
                     </div>
                     
                 </div>
-                
-            </div>
-        );
+            );
+        }
+
+        else
+            return <div className="loader">Loading User Editor...</div>;
     }
 
     else
-        return <div className="loader">Loading User Editor...</div>;
+        return <Login />;
 }
 
 export default UserEditor;

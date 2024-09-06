@@ -8,7 +8,7 @@ async function getDashboardResponse(setDashboardResponse) {
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', localStorage.getItem("token"));
 
-    fetch("http://localhost:3000/dashboard", { mode: "cors", headers: headers})
+    fetch("http://localhost:3000/dashboard", { mode: "cors", headers: headers })
 
         .then((response) => response.json())
         .then((responseBody) => setDashboardResponse(responseBody))

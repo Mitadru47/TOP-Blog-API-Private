@@ -2,13 +2,22 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
 import CommentCreator from "./CommentCreator";
+
+import Login from "./LogIn";
 import Header from "./Header";
+
+import { isLoggedIn } from "../utils/auth";
 
 async function getCommentDetail(setCommentDetailResponse){
 
     const { postid, commentid } = useParams();
 
-    fetch("http://localhost:3000/dashboard/post/" + postid + "/comment/" + commentid, { mode: "cors" })
+    const headers = new Headers();
+
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', localStorage.getItem("token"));
+
+    fetch("http://localhost:3000/dashboard/post/" + postid + "/comment/" + commentid, { mode: "cors", headers: headers })
         
         .then((response) => response.json())
         .then((responseBody) => setCommentDetailResponse(responseBody))
@@ -18,25 +27,31 @@ async function getCommentDetail(setCommentDetailResponse){
 
 function CommentEditor(){
 
-    const [commentDetailResponse, setCommentDetailResponse] = useState();
-    getCommentDetail(setCommentDetailResponse);
+    if(isLoggedIn()){
 
-    if(commentDetailResponse){
+        const [commentDetailResponse, setCommentDetailResponse] = useState();
+        getCommentDetail(setCommentDetailResponse);
 
-        return(
+        if(commentDetailResponse){
 
-            <div>
+            return(
 
-                <Header />
-                <CommentCreator post={commentDetailResponse.comment.post} comment={commentDetailResponse.comment}/>    
-            
-            </div>
-        );
+                <div>
 
+                    <Header />
+                    <CommentCreator post={commentDetailResponse.comment.post} comment={commentDetailResponse.comment}/>    
+                
+                </div>
+            );
+
+        }
+
+        else
+            return <div className="loader">Loading Comment Editor...</div>;
     }
 
     else
-        return <div className="loader">Loading Comment Editor...</div>;
+        return <Login />;
 }
 
 export default CommentEditor;

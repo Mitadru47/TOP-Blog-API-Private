@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import Login from "./LogIn";
 import PostCreator from "./PostCreator";
-import Header from "./Header";
+
+import { isLoggedIn } from "../utils/auth";
 
 async function getPost(setPost){
 
     let { id } = useParams();
 
-    fetch("http://localhost:3000/dashboard/post/" + id, { mode: "cors" })
+    const headers = new Headers();
+
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', localStorage.getItem("token"));
+
+    fetch("http://localhost:3000/dashboard/post/" + id, { mode: "cors", headers: headers })
 
         .then((response) => response.json())
         .then((responseBody) => setPost(responseBody))
@@ -18,21 +25,27 @@ async function getPost(setPost){
 
 function PostEditor() {
 
-    const [postDetailResponse, setPostDetailResponse] = useState();
-    getPost(setPostDetailResponse)
+    if(isLoggedIn()){
 
-    if(postDetailResponse){
-        
-        return(
-            <div>
-                <PostCreator postDetailResponse={postDetailResponse}/>
-                
-            </div>
-        );
+        const [postDetailResponse, setPostDetailResponse] = useState();
+        getPost(setPostDetailResponse)
+
+        if(postDetailResponse){
+            
+            return(
+                <div>
+                    <PostCreator postDetailResponse={postDetailResponse}/>
+                    
+                </div>
+            );
+        }
+
+        else
+            return <div className="loader">Loading Post Editor...</div>;
     }
 
     else
-        return <div className="loader">Loading Post Editor...</div>;
+        return <Login />;
 }
 
 export default PostEditor

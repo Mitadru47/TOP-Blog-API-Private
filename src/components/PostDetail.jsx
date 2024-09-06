@@ -4,13 +4,21 @@ import { useParams } from "react-router-dom";
 import Comments from "./Comments";
 import CommentCreator  from "./CommentCreator";
 
+import Login from "./LogIn";
 import Header from "./Header";
+
+import { isLoggedIn } from "../utils/auth";
 
 async function getPostDetailResponse(setPostDetailResponse){
 
     let { id } = useParams();
 
-    fetch("http://localhost:3000/dashboard/post/" + id, { mode: "cors" })
+    const headers = new Headers();
+
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', localStorage.getItem("token"));
+
+    fetch("http://localhost:3000/dashboard/post/" + id, { mode: "cors", headers: headers })
 
         .then((response) => response.json())
         .then((responseBody) => setPostDetailResponse(responseBody))
@@ -20,72 +28,78 @@ async function getPostDetailResponse(setPostDetailResponse){
 
 function PostDetail({ headerless }){
 
-    const [postDetailResponse, setPostDetailResponse] = React.useState();
-    getPostDetailResponse(setPostDetailResponse);
+    if(isLoggedIn()){
 
-    if(postDetailResponse){
- 
-        const post = postDetailResponse.post;
-        const comments = postDetailResponse.comments;
+        const [postDetailResponse, setPostDetailResponse] = React.useState();
+        getPostDetailResponse(setPostDetailResponse);
 
-        return(
+        if(postDetailResponse){
+    
+            const post = postDetailResponse.post;
+            const comments = postDetailResponse.comments;
 
-            <div>
+            return(
 
-                { !headerless && <Header />}
+                <div>
 
-                <div id="details">
+                    { !headerless && <Header />}
 
-                    <div id="post-detail-container">
+                    <div id="details">
 
-                        <div id="post-detail">
+                        <div id="post-detail-container">
 
-                            <div className="post-title">
-                                <a href={"/dashboard" + post[0].url}>{post[0].title}</a>
+                            <div id="post-detail">
+
+                                <div className="post-title">
+                                    <a href={"/dashboard" + post[0].url}>{post[0].title}</a>
+
+                                </div>
+
+                                <div className="post-body">{post[0].body}</div>
 
                             </div>
 
-                            <div className="post-body">{post[0].body}</div>
+                            <div className="post-detail-footer">
 
-                        </div>
+                                <div className="post-detail-tools">
 
-                        <div className="post-detail-footer">
+                                    <div className="item-edit">
+                                        <a href={"/dashboard" + post[0].url + "/edit"}>Edit</a>
+                                    </div>
 
-                            <div className="post-detail-tools">
+                                    <div className="item-delete">
+                                        <a href={"/dashboard" + post[0].url + "/delete"}>Delete</a>
+                                    </div>
 
-                                <div className="item-edit">
-                                    <a href={"/dashboard" + post[0].url + "/edit"}>Edit</a>
                                 </div>
 
-                                <div className="item-delete">
-                                    <a href={"/dashboard" + post[0].url + "/delete"}>Delete</a>
-                                </div>
+                                <div className="post-timestamp">{post[0].timestamp}</div>
 
                             </div>
 
-                            <div className="post-timestamp">{post[0].timestamp}</div>
-
                         </div>
+
+                        <Comments comments={comments} />
+
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                    
+                        <CommentCreator post={post[0]} comment={[{ _id: "", body: "", username: "", email: "" }]}/>
 
                     </div>
-
-                    <Comments comments={comments} />
-
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                
-                    <CommentCreator post={post[0]} comment={[{ _id: "", body: "", username: "", email: "" }]}/>
-
+                    
                 </div>
-                
-            </div>
-        );
+            );
+        }
+
+        else
+            return <div className="loader">Loading Post...</div>;
     }
 
     else
-        return <div className="loader">Loading Post...</div>;
+        return <Login />;
 }
 
 export default PostDetail;

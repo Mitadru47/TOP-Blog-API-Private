@@ -2,13 +2,22 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
 import CommentDetail from "./CommentDetail";
+
+import Login from "./LogIn";
 import Header from "./Header";
+
+import { isLoggedIn } from "../utils/auth";
 
 async function getCommentDetail(setCommentDetailResponse){
 
     const { postid, commentid } = useParams();
 
-    fetch("http://localhost:3000/dashboard/post/" + postid + "/comment/" + commentid, { mode: "cors" })
+    const headers = new Headers();
+
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', localStorage.getItem("token"));
+
+    fetch("http://localhost:3000/dashboard/post/" + postid + "/comment/" + commentid, { mode: "cors", headers: headers })
         
         .then((response) => response.json())
         .then((responseBody) => setCommentDetailResponse(responseBody))
@@ -18,55 +27,61 @@ async function getCommentDetail(setCommentDetailResponse){
 
 function CommentDelete(){
 
-    const [commentDetailResponse, setCommentDetailResponse] = useState();
-    getCommentDetail(setCommentDetailResponse);
+    if(isLoggedIn()){
 
-    if(commentDetailResponse){
+        const [commentDetailResponse, setCommentDetailResponse] = useState();
+        getCommentDetail(setCommentDetailResponse);
 
-        return(
+        if(commentDetailResponse){
 
-            <div>
+            return(
 
-                <Header />
+                <div>
 
-                <div id="delete-container">
+                    <Header />
 
-                    <div id="delete-dialog">
+                    <div id="delete-container">
 
-                        <div id="delete-message">Are you sure?</div>
+                        <div id="delete-dialog">
 
-                        <br></br>
+                            <div id="delete-message">Are you sure?</div>
 
-                        <div id="delete-info-lines">
+                            <br></br>
 
-                        <div className="delete-info">All info pertaining to the following comment will be permanently erased.</div>
+                            <div id="delete-info-lines">
+
+                            <div className="delete-info">All info pertaining to the following comment will be permanently erased.</div>
+
+                            </div>
+
+                            <br></br>
+
+                            <form action={"http://localhost:3000/dashboard" + commentDetailResponse.comment.url + "/delete"} method="POST">
+
+                                <button id="delete-button" type="submit">Delete</button>
+                                <a id="cancel-button" href={"/dashboard" + commentDetailResponse.comment.url}>Cancel</a>
+
+                            </form>
 
                         </div>
 
                         <br></br>
 
-                        <form action={"http://localhost:3000/dashboard" + commentDetailResponse.comment.url + "/delete"} method="POST">
-
-                            <button id="delete-button" type="submit">Delete</button>
-                            <a id="cancel-button" href={"/dashboard" + commentDetailResponse.comment.url}>Cancel</a>
-
-                        </form>
+                        <CommentDetail headerless={true}/>
 
                     </div>
 
-                    <br></br>
-
-                    <CommentDetail headerless={true}/>
-
                 </div>
+            );
 
-            </div>
-        );
+        }
 
+        else
+            return <div className="loader">Loading Comment Delete Confirmation Dialog...</div>;
     }
 
     else
-        return <div className="loader">Loading Comment Delete Confirmation Dialog...</div>;
+        return <Login />;
 }
 
 export default CommentDelete;
