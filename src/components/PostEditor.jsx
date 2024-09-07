@@ -33,9 +33,9 @@ function PostEditor() {
         if(postDetailResponse){
             
             return(
+
                 <div>
-                    <PostCreator postDetailResponse={postDetailResponse}/>
-                    
+                    <PostCreator postDetailResponse={postDetailResponse}/>                    
                 </div>
             );
         }

@@ -21,6 +21,64 @@ async function getUser(setUserResponse){
         .catch((error) => { console.log(error); })
 }
 
+function handleSubmit(event){
+
+    event.preventDefault();
+
+    // Form Data Parsing
+
+    const data = new FormData(event.currentTarget);
+
+    const plainFormData = Object.fromEntries(data.entries());
+	const formDataJsonString = JSON.stringify(plainFormData);
+
+    // API Header Creation
+
+    const headers = new Headers();
+
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', localStorage.getItem("token"));
+
+    if(isLoggedIn()){
+
+        fetch("http://localhost:3000/dashboard/post/create", { 
+            
+                mode: "cors", 
+                method: "POST", 
+                
+                headers: headers,
+                body: formDataJsonString 
+            })
+
+            .then((response) => response.json())
+            .then((responseBody) => {
+            
+                if(responseBody.status === "Success!"){
+                
+                    let message = document.getElementById("post-failed-info");
+
+                    message.classList.remove("display-on");
+                    message.classList.add("display-off");
+
+                    window.location.href = "http://localhost:5174/dashboard/post/" + responseBody.id;
+                }
+
+                else{
+
+                    let message = document.getElementById("post-failed-info");
+    
+                    message.classList.remove("display-off");
+                    message.classList.add("display-on"); 
+                }
+            })
+
+            .catch((error) => console.log(error));
+    }
+
+    else
+        window.location.href = "http://localhost:5174/dashboard";
+}
+
 function PostCreator(props){
 
     if(isLoggedIn()){
@@ -40,7 +98,7 @@ function PostCreator(props){
 
                         <div id="form-container">
 
-                            <form action="http://localhost:3000/dashboard/post/create" method="POST">
+                            <form onSubmit={handleSubmit}>
 
                                 <input type="text" name="title" id="title" placeholder="title" defaultValue={props.postDetailResponse.post[0].title}/>
                                 <br></br>
@@ -61,6 +119,8 @@ function PostCreator(props){
 
                                 {props.postDetailResponse.post[0].id ? 
                                 <a id="cancel-button" href={"/dashboard" + props.postDetailResponse.post[0].url}>Cancel</a> : <a id="cancel-button" href={"/dashboard"}>Cancel</a>}
+
+                                <div id="post-failed-info" className="display-off">Something went wrong. Please try again!</div>
 
                             </form>
 

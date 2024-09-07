@@ -53,7 +53,7 @@ function handleSubmit(event){
             .then((response) => response.json())
             .then((responseBody) => {
             
-                if(responseBody === "Success!"){
+                if(responseBody.status === "Success!"){
                 
                     let message = document.getElementById("post-failed-info");
 
