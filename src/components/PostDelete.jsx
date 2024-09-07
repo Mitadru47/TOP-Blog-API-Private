@@ -25,7 +25,7 @@ async function getPostDetailResponse(setPostDetailResponse){
         .catch((error) => console.log(error));
 }
 
-function handleSubmit(event, url){
+function handleSubmit(event){
 
     event.preventDefault();
 

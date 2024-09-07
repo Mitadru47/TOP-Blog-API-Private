@@ -1,4 +1,73 @@
 import React from "react";
+import { isLoggedIn } from "../utils/auth";
+
+function handleSubmit(event){
+
+    event.preventDefault();
+
+    // Form Data Parsing
+
+    const data = new FormData(event.currentTarget);
+
+    const plainFormData = Object.fromEntries(data.entries());
+	const formDataJsonString = JSON.stringify(plainFormData);
+
+    // API Header Creation
+
+    const headers = new Headers();
+
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', localStorage.getItem("token"));
+
+    if(isLoggedIn()){
+
+        fetch("http://localhost:3000/dashboard/post/" + plainFormData.post + "/comment/create", { 
+            
+                mode: "cors", 
+                method: "POST", 
+                
+                headers: headers,
+                body: formDataJsonString 
+            })
+
+            .then((response) => response.json())
+            .then((responseBody) => {
+            
+                if(responseBody.status === "Success!"){
+                
+                    let message = document.getElementById("post-failed-info");
+
+                    message.classList.remove("display-on");
+                    message.classList.add("display-off");
+
+                    window.location.href = "http://localhost:5174/dashboard" + responseBody.url;
+                }
+
+                else if(responseBody === "Comment Added Successfully!"){
+
+                    let message = document.getElementById("post-failed-info");
+
+                    message.classList.remove("display-on");
+                    message.classList.add("display-off");
+
+                    window.location.href = "http://localhost:5174/dashboard/post/" + plainFormData.post;
+                }
+
+                else{
+
+                    let message = document.getElementById("post-failed-info");
+    
+                    message.classList.remove("display-off");
+                    message.classList.add("display-on"); 
+                }
+            })
+
+            .catch((error) => console.log(error));
+    }
+
+    else
+        window.location.href = "http://localhost:5174/dashboard";
+}
 
 function CommentCreator({ post, comment }){
 
@@ -8,7 +77,7 @@ function CommentCreator({ post, comment }){
 
             <div id="form-container">
 
-                <form target={!(comment._id) && "status"} action={"http://localhost:3000/dashboard/post/" + post._id + "/comment/create"} method="POST">
+                <form onSubmit={handleSubmit}>
                     
                     <textarea id="body-input" name="body" cols="150" rows="4" placeholder="Comment" defaultValue={comment.body}></textarea>
                     
@@ -44,7 +113,9 @@ function CommentCreator({ post, comment }){
                             <a id="cancel-button" href={"/dashboard" + comment.url}>Cancel</a> 
                             : <a id="cancel-button" href={"/dashboard"}>Cancel</a>
                     }
-                    
+
+                    <div id="post-failed-info" className="display-off">Something went wrong. Please try again!</div>
+            
                 </form>
 
                 <br></br>
