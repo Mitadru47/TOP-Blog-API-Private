@@ -25,6 +25,61 @@ async function getPostDetailResponse(setPostDetailResponse){
         .catch((error) => console.log(error));
 }
 
+function handleSubmit(event, url){
+
+    event.preventDefault();
+
+    // Form Data Parsing
+
+    const data = new FormData(event.currentTarget);
+    const plainFormData = Object.fromEntries(data.entries());
+    
+    // API Header Creation
+
+    const headers = new Headers();
+
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', localStorage.getItem("token"));
+
+    if(isLoggedIn()){
+
+        fetch("http://localhost:3000/dashboard" + plainFormData.url + "/delete", { 
+            
+                mode: "cors", 
+                method: "POST", 
+                
+                headers: headers
+            })
+
+            .then((response) => response.json())
+            .then((responseBody) => {
+            
+                if(responseBody.status === "Success!"){
+                
+                    let message = document.getElementById("post-failed-info");
+
+                    message.classList.remove("display-on");
+                    message.classList.add("display-off");
+
+                    window.location.href = "http://localhost:5174/dashboard/";
+                }
+
+                else{
+
+                    let message = document.getElementById("post-failed-info");
+    
+                    message.classList.remove("display-off");
+                    message.classList.add("display-on"); 
+                }
+            })
+
+            .catch((error) => console.log(error));
+    }
+
+    else
+        window.location.href = "http://localhost:5174/dashboard";
+}
+
 function PostDelete(){
 
     if(isLoggedIn()){
@@ -57,10 +112,14 @@ function PostDelete(){
 
                             <br></br>
 
-                            <form action={"http://localhost:3000/dashboard" + postDetailResponse.post[0].url + "/delete"} method="POST">
+                            <form onSubmit={handleSubmit}>
+
+                                <input type="text" name="url" id="url" defaultValue={postDetailResponse.post[0].url} hidden/>
 
                                 <button id="delete-button" type="submit">Delete</button>
                                 <a id="cancel-button" href={"/dashboard" + postDetailResponse.post[0].url}>Cancel</a>
+
+                                <div id="post-failed-info" className="display-off">Something went wrong. Please try again!</div>
 
                             </form>
 
