@@ -6,17 +6,6 @@ body{
   font-family: "Patrick Hand", cursive;
 }
 
-iframe{
-
-  display: none;
-
-  padding: 25px;
-  margin: 50px 0;
-
-  border: 2px dotted black;
-  border-radius: 10px;
-}
-
 .loader{
   padding-left: 10px;
 }
@@ -100,6 +89,14 @@ iframe{
 
   padding: 10px;
   padding-left: 20px;
+}
+
+#publish-status-failed-info{
+
+  color: #800000;
+  font-size: 0.8rem;
+
+  padding: 10px;
 }
 
 .display-on{

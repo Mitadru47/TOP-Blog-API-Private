@@ -118,10 +118,6 @@ function CommentCreator({ post, comment }){
             
                 </form>
 
-                <br></br>
-
-                <iframe id="status" name="status"></iframe>
-
             </div>
         </div>
     );

@@ -21,6 +21,61 @@ async function getDashboard(setDashboardResponse){
         .catch((error) => console.log(error));
 }
 
+function handleSubmit(event){
+
+    event.preventDefault();
+
+    // Form Data Parsing
+
+    const data = new FormData(event.currentTarget);
+    const plainFormData = Object.fromEntries(data.entries());
+
+    // API Header Creation
+
+    const headers = new Headers();
+
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', localStorage.getItem("token"));
+
+    if(isLoggedIn()){
+
+        fetch("http://localhost:3000/dashboard/post/" + plainFormData.url, { 
+            
+                mode: "cors", 
+                method: "POST", 
+                
+                headers: headers
+            })
+
+            .then((response) => response.json())
+            .then((responseBody) => {
+            
+                if(responseBody.status === "Success!"){
+                
+                    let message = document.getElementById("publish-status-failed-info");
+
+                    message.classList.remove("display-on");
+                    message.classList.add("display-off");
+
+                    window.location.href = "http://localhost:5174/dashboard";
+                }
+
+                else{
+
+                    let message = document.getElementById("publish-status-failed-info");
+    
+                    message.classList.remove("display-off");
+                    message.classList.add("display-on"); 
+                }
+            })
+
+            .catch((error) => console.log(error));
+    }
+
+    else
+        window.location.href = "http://localhost:5174/dashboard";
+}
+
 function ListItem(props){
 
     let color = "white";
@@ -63,8 +118,10 @@ function ListItem(props){
                         
                         {(props.post.publishStatus ? 
                         
-                            <form target="status" action={"http://localhost:3000/dashboard/post/" + props.post._id + "/publishStatus/unpublish"} method="POST">
+                            <form onSubmit={handleSubmit}>
                             
+                                <input type="text" name="url" id="url" defaultValue={props.post._id + "/publishStatus/unpublish"} hidden/>
+
                                 <button type="submit" className="publish-button" id={"publish-" + props.post._id}>
                                 
                                     <span id="publish-primary">Published</span>
@@ -74,11 +131,15 @@ function ListItem(props){
                                     
                                 </button> 
 
+                                <div id="publish-status-failed-info" className="display-off">Please try again!</div>
+
                             </form>
                             
                             : 
                             
-                            <form target="status" action={"http://localhost:3000/dashboard/post/" + props.post._id + "/publishStatus/publish"} method="POST">
+                            <form onSubmit={handleSubmit}>
+
+                                <input type="text" name="url" id="url" defaultValue={props.post._id + "/publishStatus/publish"} hidden/>
 
                                 <button type="submit" className="unpublish-button" id={"unpublish-" + props.post._id}>
                                     
@@ -88,6 +149,8 @@ function ListItem(props){
                                     <span id="unpublish-tertiary">Publishing..</span>
                                     
                                 </button> 
+
+                                <div id="publish-status-failed-info" className="display-off">Please try again!</div>
 
                             </form>
                         )}
@@ -120,10 +183,7 @@ function Dashboard(){
                     <Header />
 
                     <div id="list-container">
-
-                        {dashboardResponse.posts.map((post) => <ListItem key={index} index={index++} post={post} />)}               
-                        <iframe id="status" name="status"></iframe>
-
+                        {dashboardResponse.posts.map((post) => <ListItem key={index} index={index++} post={post} />)}                 
                     </div>
 
                 </div>
