@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Login from "./LogIn";
 import Header from "./Header";
 
-import { isLoggedIn } from "../utils/auth";
+import { isLoggedIn, getExpirationTime, logout } from "../utils/auth";
 
 async function getUserDetail(setUserDetailResponse){
 
@@ -17,6 +17,10 @@ async function getUserDetail(setUserDetailResponse){
         .then((responseBody) => setUserDetailResponse(responseBody))
 
         .catch((error) => console.log(error));
+}
+
+function handleLogout(){
+    logout();
 }
 
 function UserDetail(){
@@ -40,8 +44,16 @@ function UserDetail(){
 
                             <div id="authorName"><strong>Author:</strong><br></br>{userDetailResponse[0].firstName + " " + userDetailResponse[0].lastName}</div>
                             
-                            <div className="item-edit">
-                                <a href={"/dashboard" + userDetailResponse[0].url + "/edit"}>Edit</a>
+                            <div className="user-detail-options">
+                           
+                                <div className="item-edit">
+                                    <a href={"/dashboard" + userDetailResponse[0].url + "/edit"}>Edit</a>
+                                </div>
+
+                                <div className="log-out">
+                                    <a href={"/dashboard"} onClick={handleLogout}>Log out</a>
+                                </div>
+
                             </div>
 
                         </div>
@@ -56,6 +68,8 @@ function UserDetail(){
                         <div><strong>Email:</strong> {userDetailResponse[0].email}</div>
 
                     </div>
+
+                    <div className="log-out-expiration-info">**Authorization token expires {  getExpirationTime() }</div>
                     
                 </div>
             );

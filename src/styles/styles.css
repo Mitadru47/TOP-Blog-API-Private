@@ -241,6 +241,32 @@ body{
   font-size: 1.4rem;
 }
 
+.user-detail-options{
+
+  display: flex;
+  justify-content: space-between;
+
+  gap: 25px;
+}
+
+.log-out a{
+
+  text-decoration: none;
+  color: black;
+}
+
+.log-out a:hover{
+  text-decoration: underline;
+}
+
+.log-out-expiration-info{
+
+  padding: 10px;
+  padding-left: 25px;
+
+  font-size: 0.9rem;
+}
+
 /* Dashboard.jsx */
 
 #list-container{

@@ -19,7 +19,7 @@ export function getExpirationTime(){
     const expiration = localStorage.getItem("expiresIn");
     const expiresAt = JSON.parse(expiration);
 
-    return moment(expiresAt);
+    return moment(expiresAt).fromNow();
 }
 
 export function isLoggedIn(){
