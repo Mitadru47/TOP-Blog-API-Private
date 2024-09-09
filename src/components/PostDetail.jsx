@@ -73,7 +73,12 @@ function PostDetail({ headerless }){
 
                                 </div>
 
-                                <div className="post-timestamp">{post[0].timestamp}</div>
+                                <div className="post-timestamp-container">
+                                
+                                    <div className="post-timestamp">Edited: {post[0].timestamp}</div>
+                                    <div className="post-timestamp">Created: {post[0].createdTimestamp}</div>
+                                
+                                </div>
 
                             </div>
 

@@ -97,12 +97,16 @@ function ListItem(props){
                 </div>
 
                 <div className="item-timestamp">
-                    Created: {props.post.formattedTimestamp}
+                    Created: {props.post.formattedCreatedTimestamp}
                 </div>
 
             </div>
 
             <div className="list-item-tools">
+
+                <div className="item-timestamp">
+                    Last Edited: {props.post.formattedTimestamp}
+                </div>
 
                 <div className="item-edit">
                     <a href={"/dashboard" + props.post.url + "/edit"}>Edit</a>

@@ -332,7 +332,7 @@ body{
   justify-content: space-between;
   align-items: center;
 
-  width: 20vw;
+  gap: 35px;
 }
 
 .item-edit a{
@@ -500,6 +500,12 @@ body{
   gap: 25px;
 
   font-size: 0.9rem;
+}
+
+.post-timestamp-container{
+
+  display: flex;
+  gap: 25px;
 }
 
 .post-timestamp{
@@ -703,4 +709,12 @@ body{
 
   display: flex;
   gap: 25px;
+}
+
+.comment-timestamp-container{
+
+  display: flex;
+  gap: 25px;
+
+  font-size: 0.9rem;
 }

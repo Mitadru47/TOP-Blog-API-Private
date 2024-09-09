@@ -71,9 +71,13 @@ function CommentDetail({ headerless }){
                             <div><strong>Email: </strong>{commentDetailResponse.comment.email}</div>
 
                             <br></br>
-                            <br></br>
-
-                            <div><strong>Timestamp: </strong>{commentDetailResponse.comment.timestamp}</div>
+                          
+                            <div className="comment-timestamp-container">
+                            
+                                <div><strong>Created: </strong>{commentDetailResponse.comment.createdTimestamp}</div>
+                                <div><strong>Edited: </strong>{commentDetailResponse.comment.timestamp}</div>
+                            
+                            </div>
 
                         </div>
                         
