@@ -105,7 +105,7 @@ function ListItem(props){
             <div className="list-item-tools">
 
                 <div className="item-timestamp">
-                    Last Edited: {props.post.formattedTimestamp}
+                    {!(props.post.createdTimestamp === props.post.timestamp) && ("Last Edited: " + props.post.formattedTimestamp)}
                 </div>
 
                 <div className="item-edit">

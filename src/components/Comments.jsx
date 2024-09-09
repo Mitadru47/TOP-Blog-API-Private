@@ -19,6 +19,10 @@ function Comment({ comment }){
 
             <div className="comment-tools">
 
+                <div>
+                    {!(comment.createdTimestamp === comment.timestamp) && "Edited by Post Author"}
+                </div>
+
                 <div className="item-edit">
                     <a href={"/dashboard" + comment.url + "/edit"}>Edit</a>
                 </div>

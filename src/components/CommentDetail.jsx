@@ -75,7 +75,8 @@ function CommentDetail({ headerless }){
                             <div className="comment-timestamp-container">
                             
                                 <div><strong>Created: </strong>{commentDetailResponse.comment.createdTimestamp}</div>
-                                <div><strong>Edited: </strong>{commentDetailResponse.comment.timestamp}</div>
+                                <div>{!(commentDetailResponse.comment.createdTimestamp === commentDetailResponse.comment.timestamp) 
+                                    && (<p style={{margin:0}}><strong>Edited: </strong>{commentDetailResponse.comment.timestamp}</p>)}</div>
                             
                             </div>
 
