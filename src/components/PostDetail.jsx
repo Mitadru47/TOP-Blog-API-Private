@@ -26,6 +26,61 @@ async function getPostDetailResponse(setPostDetailResponse){
         .catch((error) => console.log(error));
 }
 
+function handleSubmit(event){
+
+    event.preventDefault();
+
+    // Form Data Parsing
+
+    const data = new FormData(event.currentTarget);
+    const plainFormData = Object.fromEntries(data.entries());
+
+    // API Header Creation
+
+    const headers = new Headers();
+
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', localStorage.getItem("token"));
+
+    if(isLoggedIn()){
+
+        fetch("http://localhost:3000/dashboard/post/" + plainFormData.url, { 
+            
+                mode: "cors", 
+                method: "POST", 
+                
+                headers: headers
+            })
+
+            .then((response) => response.json())
+            .then((responseBody) => {
+            
+                if(responseBody.status === "Success!"){
+                
+                    let message = document.getElementById("publish-status-failed-info");
+
+                    message.classList.remove("display-on");
+                    message.classList.add("display-off");
+
+                    window.location.href = "http://localhost:5174/dashboard/post/" + plainFormData.id;
+                }
+
+                else{
+
+                    let message = document.getElementById("publish-status-failed-info");
+    
+                    message.classList.remove("display-off");
+                    message.classList.add("display-on"); 
+                }
+            })
+
+            .catch((error) => console.log(error));
+    }
+
+    else
+        window.location.href = "http://localhost:5174/dashboard";
+}
+
 function PostDetail({ headerless }){
 
     if(isLoggedIn()){
@@ -38,6 +93,14 @@ function PostDetail({ headerless }){
             const post = postDetailResponse.post;
             const comments = postDetailResponse.comments;
 
+            let color = "white";
+
+            if(post[0].publishStatus === true)
+                color = "#B4E380";
+
+            else
+                color = "#FFCF96";
+
             return(
 
                 <div>
@@ -46,16 +109,70 @@ function PostDetail({ headerless }){
 
                     <div id="details">
 
-                        <div id="post-detail-container">
+                        <div id="post-detail-container" style={{backgroundColor: color}}>
 
-                            <div id="post-detail">
+                            <div id="post-detail-sub-container">
 
-                                <div className="post-title">
-                                    <a href={"/dashboard" + post[0].url}>{post[0].title}</a>
+                                <div id="post-detail">
+
+                                    <div className="post-title">
+                                        <a href={"/dashboard" + post[0].url}>{post[0].title}</a>
+
+                                    </div>
+
+                                    <div className="post-body">{post[0].body}</div>
 
                                 </div>
 
-                                <div className="post-body">{post[0].body}</div>
+                                <div className="item-publish-status-container">
+
+                                    
+                                    <div className="item-publish-status">
+                                        
+                                        {(post[0].publishStatus ? 
+                                        
+                                            <form onSubmit={handleSubmit}>
+                                            
+                                                <input type="text" name="id" id="id" defaultValue={post[0]._id} hidden/>
+                                                <input type="text" name="url" id="url" defaultValue={post[0]._id + "/publishStatus/unpublish"} hidden/>
+
+                                                <button type="submit" className="publish-button" id={"publish-" + post[0]._id}>
+                                                
+                                                    <span id="publish-primary">Published</span>
+
+                                                    <span id="publish-secondary">Unpublish?</span>
+                                                    <span id="publish-tertiary">Unpublishing..</span>
+                                                    
+                                                </button> 
+
+                                                <div id="publish-status-failed-info" className="display-off">Please try again!</div>
+
+                                            </form>
+                                            
+                                            : 
+                                            
+                                            <form onSubmit={handleSubmit}>
+
+                                                <input type="text" name="id" id="id" defaultValue={post[0]._id} hidden/>
+                                                <input type="text" name="url" id="url" defaultValue={post[0]._id + "/publishStatus/publish"} hidden/>
+
+                                                <button type="submit" className="unpublish-button" id={"unpublish-" + post[0]._id}>
+                                                    
+                                                    <span id="unpublish-primary">Unpublished</span>
+
+                                                    <span id="unpublish-secondary">Publish?</span>
+                                                    <span id="unpublish-tertiary">Publishing..</span>
+                                                    
+                                                </button> 
+
+                                                <div id="publish-status-failed-info" className="display-off">Please try again!</div>
+
+                                            </form>
+                                        )}
+
+                                    </div>
+
+                                </div>
 
                             </div>
 

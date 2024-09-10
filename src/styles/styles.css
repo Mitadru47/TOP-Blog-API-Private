@@ -469,6 +469,12 @@ body{
   gap: 50px;
 }
 
+#post-detail-sub-container{
+
+  display: flex;
+  justify-content: space-between;
+}
+
 .post-title a{
 
   text-decoration: none;
