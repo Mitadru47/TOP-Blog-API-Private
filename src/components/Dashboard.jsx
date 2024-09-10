@@ -5,19 +5,13 @@ import Login from "./LogIn";
 import Header from "./Header";
 
 import { isLoggedIn } from "../utils/auth";
+import axios from "../utils/axios";
 
 async function getDashboard(setDashboardResponse){
-    
-    const headers = new Headers();
 
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', localStorage.getItem("token"));
+    axios.get("dashboard")
 
-    fetch("http://localhost:3000/dashboard", { mode: "cors", headers: headers })
-
-        .then((response) => response.json())
-        .then((responseBody) => setDashboardResponse(responseBody))
-
+        .then((response) => setDashboardResponse(response.data))
         .catch((error) => console.log(error));
 }
 
@@ -30,27 +24,13 @@ function handleSubmit(event){
     const data = new FormData(event.currentTarget);
     const plainFormData = Object.fromEntries(data.entries());
 
-    // API Header Creation
-
-    const headers = new Headers();
-
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', localStorage.getItem("token"));
-
     if(isLoggedIn()){
-
-        fetch("http://localhost:3000/dashboard/post/" + plainFormData.url, { 
+        
+        axios.post("dashboard/post/" + plainFormData.url)
+        
+            .then((response) => {
             
-                mode: "cors", 
-                method: "POST", 
-                
-                headers: headers
-            })
-
-            .then((response) => response.json())
-            .then((responseBody) => {
-            
-                if(responseBody.status === "Success!"){
+                if(response.data.status === "Success!"){
                 
                     let message = document.getElementById("publish-status-failed-info");
 
