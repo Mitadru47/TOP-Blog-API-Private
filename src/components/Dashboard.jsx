@@ -81,10 +81,10 @@ function ListItem(props){
     let color = "white";
 
     if(props.post.publishStatus === true)
-        color = "#B4E380";
+        color = "#C3EDC0";
 
     else
-        color = "#FFCF96";
+        color = "#FFEEA9";
 
     return(
 

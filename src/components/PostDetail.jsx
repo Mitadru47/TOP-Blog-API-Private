@@ -96,10 +96,10 @@ function PostDetail({ headerless }){
             let color = "white";
 
             if(post[0].publishStatus === true)
-                color = "#B4E380";
+                color = "#C3EDC0";
 
             else
-                color = "#FFCF96";
+                color = "#FFEEA9";
 
             return(
 
