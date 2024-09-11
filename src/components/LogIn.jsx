@@ -36,7 +36,32 @@ function handleSubmit(event){
             }
         })
 
-        .catch((error) => console.log(error));
+        .catch((error) => {
+            
+            console.log(error);
+        
+            let message = document.getElementById("login-failed-info");
+
+            message.classList.remove("display-off");
+            message.classList.add("display-on"); 
+        });
+}
+
+function passwordVisibiltyToggle(){
+
+    var password = document.getElementById("login-password");
+  
+    if (password.type === "password"){
+    
+        password.type = "text";
+        password.placeholder = "Password - Unmasked"
+    }
+
+    else {
+
+        password.type = "password";
+        password.placeholder = "Password - Masked"
+    }
 }
 
 function Login(){
@@ -58,13 +83,24 @@ function Login(){
                         <div id="login-info">Author Mode - Sign In Required*</div>
 
                         <input type="text" name="username" id="login-username" placeholder="Username"/>
-                        <input type="text" name="password" id="login-password" placeholder="Password"/>
-
+                        <input type="password" name="password" id="login-password" placeholder="Password - Masked"/>
+                        
                         <button type="submit" id="submit-button">Log in</button>
 
                         <br></br>
 
-                        <div id="login-failed-info" className="display-off">Log in failed, Please try again!</div>
+                        <div id="login-form-container-footer">
+                       
+                            <div id="password-checkbox-container">
+
+                                <input type="checkbox" id="password-checkbox" onClick={passwordVisibiltyToggle}/>
+                                <span id="password-checkbox-info">show password</span>
+
+                            </div>
+
+                            <div id="login-failed-info" className="display-off">Log in failed, Please try again!</div> 
+                            
+                        </div>
 
                     </form>
 

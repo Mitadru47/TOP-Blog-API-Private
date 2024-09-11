@@ -72,11 +72,36 @@ function handleSubmit(event){
                 }
             })
 
-            .catch((error) => console.log(error));
+            .catch((error) => {
+            
+                console.log(error);
+            
+                let message = document.getElementById("post-failed-info");
+    
+                message.classList.remove("display-off");
+                message.classList.add("display-on"); 
+            });
     }
 
     else
         window.location.href = "http://localhost:5174/dashboard";
+}
+
+function passwordVisibiltyToggle(){
+
+    var password = document.getElementById("password");
+  
+    if (password.type === "password"){
+    
+        password.type = "text";
+        password.placeholder = "Password - Unmasked"
+    }
+
+    else {
+
+        password.type = "password";
+        password.placeholder = "Password - Masked"
+    }
 }
 
 function UserEditor(){
@@ -108,7 +133,7 @@ function UserEditor(){
                                 <br></br>
 
                                 <input type="text" name="username" id="username" defaultValue={userResponse[0].username}/>
-                                <input type="text" name="password" id="password" defaultValue={userResponse[0].password}/>
+                                <input type="password" name="password" id="password" placeholder="Password - Masked" required/>
 
                                 <br></br>
                                 <br></br>
@@ -118,7 +143,18 @@ function UserEditor(){
                                 <button type="submit" id="submit-button">Update Author Details</button>
                                 <a id="cancel-button" href={"/dashboard" + userResponse[0].url}>Cancel</a>
 
-                                <div id="post-failed-info" className="display-off">Something went wrong. Please try again!</div>
+                                <div id="login-form-container-footer">
+                       
+                                    <div id="password-checkbox-container">
+
+                                        <input type="checkbox" id="password-checkbox" onClick={passwordVisibiltyToggle}/>
+                                        <span id="password-checkbox-info">show password</span>
+
+                                    </div>
+
+                                    <div id="post-failed-info" className="display-off">Something went wrong. Please try again!</div>
+                            
+                                </div>
 
                             </form>
 
