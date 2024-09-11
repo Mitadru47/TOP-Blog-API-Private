@@ -5,9 +5,11 @@ import Login from "./LogIn";
 import Header from "./Header";
 
 import { isLoggedIn } from "../utils/auth";
-import axios from "../utils/axios";
 
-async function getDashboard(setDashboardResponse){
+import axios from "../utils/axios";
+import { BLOG_API_PRIVATE_DASHBOARD } from "../utils/urls";
+
+async function getDashboardResponse(setDashboardResponse){
 
     axios.get("dashboard")
 
@@ -37,7 +39,7 @@ function handleSubmit(event){
                     message.classList.remove("display-on");
                     message.classList.add("display-off");
 
-                    window.location.href = "http://localhost:5174/dashboard";
+                    window.location.href = BLOG_API_PRIVATE_DASHBOARD;
                 }
 
                 else{
@@ -53,7 +55,7 @@ function handleSubmit(event){
     }
 
     else
-        window.location.href = "http://localhost:5174/dashboard";
+        window.location.href = BLOG_API_PRIVATE_DASHBOARD;
 }
 
 function ListItem(props){
@@ -156,7 +158,7 @@ function Dashboard(){
         let  index = 0;
 
         const [ dashboardResponse, setDashboardResponse ] = useState();
-        useEffect(() => { getDashboard(setDashboardResponse); });
+        useEffect(() => { getDashboardResponse(setDashboardResponse); });
         
         if(dashboardResponse){
 

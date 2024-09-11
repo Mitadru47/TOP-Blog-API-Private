@@ -7,21 +7,15 @@ import Login from "./LogIn";
 import Header from "./Header";
 
 import { isLoggedIn } from "../utils/auth";
+import axios from "../utils/axios";
 
 async function getCommentDetail(setCommentDetailResponse){
 
     const { postid, commentid } = useParams();
 
-    const headers = new Headers();
+    axios.get("dashboard/post/" + postid + "/comment/" + commentid)
 
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', localStorage.getItem("token"));
-
-    fetch("http://localhost:3000/dashboard/post/" + postid + "/comment/" + commentid, { mode: "cors", headers: headers })
-        
-        .then((response) => response.json())
-        .then((responseBody) => setCommentDetailResponse(responseBody))
-
+        .then((response) => setCommentDetailResponse(response.data))
         .catch((error) => console.log(error))
 }
 

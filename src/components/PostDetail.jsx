@@ -9,20 +9,16 @@ import Header from "./Header";
 
 import { isLoggedIn } from "../utils/auth";
 
+import axios from "../utils/axios";
+import { BLOG_API_PRIVATE_DASHBOARD } from "../utils/urls";
+
 async function getPostDetailResponse(setPostDetailResponse){
 
     let { id } = useParams();
 
-    const headers = new Headers();
+    axios.get("dashboard/post/" + id)
 
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', localStorage.getItem("token"));
-
-    fetch("http://localhost:3000/dashboard/post/" + id, { mode: "cors", headers: headers })
-
-        .then((response) => response.json())
-        .then((responseBody) => setPostDetailResponse(responseBody))
-
+        .then((response) => setPostDetailResponse(response.data))
         .catch((error) => console.log(error));
 }
 
@@ -35,34 +31,20 @@ function handleSubmit(event){
     const data = new FormData(event.currentTarget);
     const plainFormData = Object.fromEntries(data.entries());
 
-    // API Header Creation
-
-    const headers = new Headers();
-
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', localStorage.getItem("token"));
-
     if(isLoggedIn()){
 
-        fetch("http://localhost:3000/dashboard/post/" + plainFormData.url, { 
+        axios.post("dashboard/post/" + plainFormData.url)
+        
+            .then((response) => {
             
-                mode: "cors", 
-                method: "POST", 
-                
-                headers: headers
-            })
-
-            .then((response) => response.json())
-            .then((responseBody) => {
-            
-                if(responseBody.status === "Success!"){
+                if(response.data.status === "Success!"){
                 
                     let message = document.getElementById("publish-status-failed-info");
 
                     message.classList.remove("display-on");
                     message.classList.add("display-off");
 
-                    window.location.href = "http://localhost:5174/dashboard/post/" + plainFormData.id;
+                    window.location.href = BLOG_API_PRIVATE_DASHBOARD + "/post/" + plainFormData.id;
                 }
 
                 else{
@@ -78,7 +60,7 @@ function handleSubmit(event){
     }
 
     else
-        window.location.href = "http://localhost:5174/dashboard";
+        window.location.href = BLOG_API_PRIVATE_DASHBOARD;
 }
 
 function PostDetail({ headerless }){

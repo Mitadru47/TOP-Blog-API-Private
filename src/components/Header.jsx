@@ -1,18 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-async function getDashboardResponse(setDashboardResponse) {
-    
-    const headers = new Headers();
+import axios from "../utils/axios";
 
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', localStorage.getItem("token"));
+async function getDashboardResponse(setDashboardResponse){
 
-    fetch("http://localhost:3000/dashboard", { mode: "cors", headers: headers })
+    axios.get("dashboard")
 
-        .then((response) => response.json())
-        .then((responseBody) => setDashboardResponse(responseBody))
-
+        .then((response) => setDashboardResponse(response.data))
         .catch((error) => console.log(error));
 }
 

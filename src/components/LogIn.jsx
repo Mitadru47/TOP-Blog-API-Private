@@ -1,6 +1,9 @@
 import React from "react";
 import { setLocalStorage } from "../utils/auth";
 
+import axios from "../utils/axios";
+import { BLOG_API_PUBLIC_INDEX, BLOG_API_PRIVATE_DASHBOARD } from "../utils/urls";
+
 function handleSubmit(event){
 
     event.preventDefault();
@@ -9,32 +12,19 @@ function handleSubmit(event){
     const plainFormData = Object.fromEntries(data.entries());
 	const formDataJsonString = JSON.stringify(plainFormData);
 
-    fetch("http://localhost:3000/dashboard/login", { 
-        
-            mode: "cors", 
-            method: "POST", 
-            
-            headers: {
+    axios.post("dashboard/login", formDataJsonString)
 
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }, 
-    
-            body: formDataJsonString 
-        })
-
-        .then((response) => response.json())
-        .then((responseBody) => {
+        .then((response) => {
         
-            if(!responseBody.message){
+            if(!response.data.message){
 
                 let message = document.getElementById("login-failed-info");
 
                 message.classList.remove("display-on");
                 message.classList.add("display-off");
 
-                setLocalStorage(responseBody);
-                window.location.href = "http://localhost:5174/dashboard";
+                setLocalStorage(response.data);
+                window.location.href = BLOG_API_PRIVATE_DASHBOARD;
             }
 
             else{
@@ -79,7 +69,7 @@ function Login(){
                     </form>
 
                     <div id="public-url-container"> Don't have author credentials?
-                        <a id="public-url" href="http://localhost:5173/"> Go to Blog API - Public</a>
+                        <a id="public-url" href={BLOG_API_PUBLIC_INDEX}> Go to Blog API - Public</a>
                     </div>
 
                 </div>

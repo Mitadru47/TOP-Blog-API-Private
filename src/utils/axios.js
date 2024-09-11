@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BLOG_API_BASE_URL } from "../utils/urls";
 
 const instance = axios.create({
     
@@ -10,7 +11,7 @@ const instance = axios.create({
         'Authorization': localStorage.getItem("token")
     },
 
-    baseURL: "http://localhost:3000/"
+    baseURL: BLOG_API_BASE_URL
 });
 
 export default instance;

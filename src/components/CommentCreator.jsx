@@ -1,6 +1,9 @@
 import React from "react";
 import { isLoggedIn } from "../utils/auth";
 
+import axios from "../utils/axios";
+import { BLOG_API_PRIVATE_DASHBOARD } from "../utils/urls";
+
 function handleSubmit(event){
 
     event.preventDefault();
@@ -12,35 +15,20 @@ function handleSubmit(event){
     const plainFormData = Object.fromEntries(data.entries());
 	const formDataJsonString = JSON.stringify(plainFormData);
 
-    // API Header Creation
-
-    const headers = new Headers();
-
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', localStorage.getItem("token"));
-
     if(isLoggedIn()){
 
-        fetch("http://localhost:3000/dashboard/post/" + plainFormData.post + "/comment/create", { 
-            
-                mode: "cors", 
-                method: "POST", 
-                
-                headers: headers,
-                body: formDataJsonString 
-            })
+        axios.post("dashboard/post/" + plainFormData.post + "/comment/create", formDataJsonString)
 
-            .then((response) => response.json())
-            .then((responseBody) => {
+            .then((response) => {
             
-                if(responseBody.status === "Success!"){
+                if(response.data.status === "Success!"){
                 
                     let message = document.getElementById("post-failed-info");
 
                     message.classList.remove("display-on");
                     message.classList.add("display-off");
 
-                    window.location.href = "http://localhost:5174/dashboard" + responseBody.url;
+                    window.location.href = BLOG_API_PRIVATE_DASHBOARD + response.data.url;
                 }
 
                 else if(responseBody === "Comment Added Successfully!"){
@@ -50,7 +38,7 @@ function handleSubmit(event){
                     message.classList.remove("display-on");
                     message.classList.add("display-off");
 
-                    window.location.href = "http://localhost:5174/dashboard/post/" + plainFormData.post;
+                    window.location.href = BLOG_API_PRIVATE_DASHBOARD + "/post/" + plainFormData.post;
                 }
 
                 else{
@@ -66,7 +54,7 @@ function handleSubmit(event){
     }
 
     else
-        window.location.href = "http://localhost:5174/dashboard";
+        window.location.href = BLOG_API_PRIVATE_DASHBOARD;
 }
 
 function CommentCreator({ post, comment }){

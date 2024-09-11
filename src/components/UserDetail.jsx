@@ -4,18 +4,13 @@ import Login from "./LogIn";
 import Header from "./Header";
 
 import { isLoggedIn, getExpirationTime, logout } from "../utils/auth";
+import axios from "../utils/axios";
 
 async function getUserDetail(setUserDetailResponse){
 
-    const headers = new Headers();
+    axios.get("dashboard/user")
 
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', localStorage.getItem("token"));
-
-    fetch("http://localhost:3000/dashboard/user", { mode: 'cors', headers: headers })
-        .then((response) => response.json())
-        .then((responseBody) => setUserDetailResponse(responseBody))
-
+        .then((response) => setUserDetailResponse(response.data))
         .catch((error) => console.log(error));
 }
 

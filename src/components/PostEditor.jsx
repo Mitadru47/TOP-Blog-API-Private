@@ -5,21 +5,15 @@ import Login from "./LogIn";
 import PostCreator from "./PostCreator";
 
 import { isLoggedIn } from "../utils/auth";
+import axios from "../utils/axios";
 
 async function getPost(setPost){
 
     let { id } = useParams();
 
-    const headers = new Headers();
-
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', localStorage.getItem("token"));
-
-    fetch("http://localhost:3000/dashboard/post/" + id, { mode: "cors", headers: headers })
-
-        .then((response) => response.json())
-        .then((responseBody) => setPost(responseBody))
-
+    axios.get("dashboard/post/" + id)
+    
+        .then((response) => setPost(response.data))
         .catch((error) => { console.log(error); });
 }
 
