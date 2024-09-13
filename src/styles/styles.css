@@ -784,4 +784,32 @@ body{
   #public-url-container{
     padding: 0;
   }
+
+  /* Dashboard.jsx */
+
+  #header{
+    font-size: 2rem;
+  }
+ 
+  #author, #post-count{
+    font-size: 1rem;
+  }
+
+  #author-container a{
+
+    font-size: 1rem;
+    padding: 7.5px 8.5px;
+  }
+
+  #header-info-container{
+    gap: 10px;
+  }
+
+  .list-item-tools{
+    
+    width: 115px;
+
+    flex-direction: column;
+    gap: 5px;
+  }
 }
