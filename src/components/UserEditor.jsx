@@ -106,14 +106,14 @@ function UserEditor(){
 
                             <form onSubmit={handleSubmit}>
 
-                                <input type="text" name="firstName" id="firstname" defaultValue={userResponse[0].firstName}/>
-                                <input type="text" name="lastName" id="lastname" defaultValue={userResponse[0].lastName}/>
+                                <input type="text" name="firstName" id="firstname" placeholder="Firstname" defaultValue={userResponse[0].firstName}/>
+                                <input type="text" name="lastName" id="lastname" placeholder="Lastname" defaultValue={userResponse[0].lastName}/>
 
-                                <input type="text" name="email" id="email" defaultValue={userResponse[0].email}/>
+                                <input type="text" name="email" id="email" placeholder="Email" defaultValue={userResponse[0].email}/>
                             
                                 <br></br>
 
-                                <input type="text" name="username" id="username" defaultValue={userResponse[0].username}/>
+                                <input type="text" name="username" id="username" placeholder="Username" defaultValue={userResponse[0].username}/>
                                 <input type="password" name="password" id="password" placeholder="Password - Masked" required/>
 
                                 <br></br>
