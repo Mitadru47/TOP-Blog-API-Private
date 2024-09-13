@@ -2,6 +2,8 @@
 
 body{
 
+  zoom: 90%;
+
   padding: 5vw;
   font-family: "Patrick Hand", cursive;
 }
@@ -59,7 +61,7 @@ body{
   gap: 10px;
 }
 
-#login-form-container, #login-form-container form input, #login-form-container form button{
+#login-form-container, #login-form-container-secondary input, #login-form-container-secondary button{
 
   padding: 7.5px;
   margin: 1px;
@@ -745,4 +747,41 @@ body{
   gap: 25px;
 
   font-size: 0.9rem;
+}
+
+@media (max-width: 570px){
+
+  /* Login.jsx */
+
+  #login-container{
+    height: 80vh;
+  }
+
+  #login-header{
+    padding: 0;
+  }
+
+  #login-form-container form{
+    width: 275px;
+  }
+
+  #login-form-container, #login-container-secondary{
+    align-items: center;
+  }
+
+  #login-form-container-secondary{
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  #login-form-container-secondary button {
+
+    margin-top: 2.5px;
+    width: 47px;
+  }
+
+  #public-url-container{
+    padding: 0;
+  }
 }

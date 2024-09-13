@@ -82,12 +82,14 @@ function Login(){
 
                         <div id="login-info">Author Mode - Sign In Required*</div>
 
-                        <input type="text" name="username" id="login-username" placeholder="Username"/>
-                        <input type="password" name="password" id="login-password" placeholder="Password - Masked"/>
-                        
-                        <button type="submit" id="submit-button">Log in</button>
+                        <div id="login-form-container-secondary">
 
-                        <br></br>
+                            <input type="text" name="username" id="login-username" placeholder="Username"/>
+                            <input type="password" name="password" id="login-password" placeholder="Password - Masked"/>
+                            
+                            <button type="submit" id="submit-button">Log in</button>
+
+                        </div >
 
                         <div id="login-form-container-footer">
                        
