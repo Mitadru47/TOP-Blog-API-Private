@@ -97,9 +97,8 @@ function CommentCreator({ post, comment }){
                     }
 
                     {
-                        (comment._id) ?
-                            <a id="cancel-button" href={"/dashboard" + comment.url}>Cancel</a> 
-                            : <a id="cancel-button" href={"/dashboard"}>Cancel</a>
+                        (comment._id) &&
+                            <a id="cancel-button" href={"/dashboard" + comment.url}>Cancel</a>
                     }
 
                     <div id="post-failed-info" className="display-off">Something went wrong. Please try again!</div>

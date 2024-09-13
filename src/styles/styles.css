@@ -560,7 +560,7 @@ body{
   display: flex;
   
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
 
   border: 2px dashed black;
   border-radius: 10px;
@@ -587,6 +587,12 @@ body{
   text-decoration: underline;
 }
 
+#comment-edit-info{
+
+  margin-left: 25px;
+  width: 120px;
+}
+
 .comment-tools{
 
   display: flex;
@@ -611,7 +617,9 @@ body{
 }
 
 #body-input{
+  
   margin-bottom: 0;
+  width: 80vw;
 }
 
 #email-input{
@@ -811,5 +819,31 @@ body{
 
     flex-direction: column;
     gap: 5px;
+  }
+
+  /* PostDetail.jsx */
+
+  .post-detail-tools, .post-timestamp-container{
+
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  /* Comments.jsx */
+
+  .comment{
+    
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .comment-tools{
+
+    width: 75vw;
+    justify-content: end;
+  }
+
+  .comment-tools div{
+    margin-top: 10px;
   }
 }

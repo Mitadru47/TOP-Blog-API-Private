@@ -19,7 +19,7 @@ function Comment({ comment }){
 
             <div className="comment-tools">
 
-                <div>
+                <div id="comment-edit-info">
                     {!(comment.createdTimestamp === comment.timestamp) && "Edited by Post Author"}
                 </div>
 
