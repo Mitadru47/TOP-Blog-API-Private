@@ -290,6 +290,12 @@ body{
   font-size: 0.9rem;
 }
 
+/* UserEditor.jsx */
+
+#email{
+  width: 287.5px;
+}
+
 /* Dashboard.jsx */
 
 #list-container{
@@ -685,7 +691,11 @@ body{
 }
 
 #title{
-  width: 400px;
+  width: 40vw;
+}
+
+#body{
+  width: 80vw;
 }
 
 #timestamp{
