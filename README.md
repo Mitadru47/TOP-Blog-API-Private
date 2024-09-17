@@ -44,5 +44,5 @@ GitHub Repository: https://github.com/Mitadru47/TOP-Blog-API
 
 For additional information regarding `Blog API - Public`, use the following links:
 
-Application URL: https://blogpublic.netlify.app/
+Application URL: https://blogpublic.netlify.app/  <br />
 GitHub Repository: https://github.com/Mitadru47/TOP-Blog-API-Public
