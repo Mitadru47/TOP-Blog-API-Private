@@ -9,7 +9,11 @@ import { isLoggedIn } from "../utils/auth";
 import axios from "../utils/axios";
 import { BLOG_API_PRIVATE_DASHBOARD } from "../utils/urls";
 
+let apiCallCount = 0;
+
 async function getDashboardResponse(setDashboardResponse){
+
+    console.log("API Trigger #" + apiCallCount++);
 
     axios.get("dashboard")
 
