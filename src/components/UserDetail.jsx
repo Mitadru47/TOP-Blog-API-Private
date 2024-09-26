@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Login from "./LogIn";
 import Header from "./Header";
@@ -6,7 +6,11 @@ import Header from "./Header";
 import { isLoggedIn, getExpirationTime, logout } from "../utils/auth";
 import axios from "../utils/axios";
 
+let apiCallCount = 0;
+
 async function getUserDetail(setUserDetailResponse){
+
+    console.log("UserDetail - API Trigger #" + apiCallCount++);
 
     axios.get("dashboard/user")
 
@@ -23,8 +27,18 @@ function UserDetail(){
     if(isLoggedIn()){
 
         const [userDetailResponse, setUserDetailResponse] = useState();
-        getUserDetail(setUserDetailResponse);
-
+        
+        useEffect(() => { 
+    
+            const intervalID = setInterval(() => {
+              getUserDetail(setUserDetailResponse); 
+        
+            }, 5000);
+            
+            // Clean-Up Function
+            return (() => { clearInterval(intervalID); });
+        });
+        
         if(userDetailResponse){
             
             return(

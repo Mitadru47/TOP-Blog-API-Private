@@ -7,9 +7,11 @@ import PostCreator from "./PostCreator";
 import { isLoggedIn } from "../utils/auth";
 import axios from "../utils/axios";
 
-async function getPost(setPost){
+let apiCallCount = 0;
 
-    let { id } = useParams();
+async function getPost(setPost, id){
+
+    console.log("PostEditor - API Trigger #" + apiCallCount++);
 
     axios.get("dashboard/post/" + id)
     
@@ -21,8 +23,10 @@ function PostEditor() {
 
     if(isLoggedIn()){
 
+        let { id } = useParams();
         const [postDetailResponse, setPostDetailResponse] = useState();
-        getPost(setPostDetailResponse)
+
+        useEffect(() => { getPost(setPostDetailResponse, id); }, []);
 
         if(postDetailResponse){
             

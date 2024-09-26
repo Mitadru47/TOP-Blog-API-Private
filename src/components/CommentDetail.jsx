@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import Login from "./LogIn";
@@ -7,9 +7,11 @@ import Header from "./Header";
 import { isLoggedIn } from "../utils/auth";
 import axios from "../utils/axios";
 
-async function getCommentDetail(setCommentDetailResponse){
+let apiCallCount = 0;
 
-    const { postid, commentid } = useParams();
+async function getCommentDetail(setCommentDetailResponse, postid, commentid){
+
+    console.log("CommentDetail - API Trigger #" + apiCallCount++);
 
     axios.get("dashboard/post/" + postid + "/comment/" + commentid)
     
@@ -21,9 +23,20 @@ function CommentDetail({ headerless }){
 
     if(isLoggedIn()){
 
+        const { postid, commentid } = useParams();
         const [commentDetailResponse, setCommentDetailResponse] = useState();
-        getCommentDetail(setCommentDetailResponse);
 
+        useEffect(() => { 
+    
+            const intervalID = setInterval(() => {
+              getCommentDetail(setCommentDetailResponse, postid, commentid);
+        
+            }, 5000);
+            
+            // Clean-Up Function
+            return (() => { clearInterval(intervalID); });
+        });
+        
         if(commentDetailResponse){
 
             return(

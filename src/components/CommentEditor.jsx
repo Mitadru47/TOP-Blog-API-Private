@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import CommentCreator from "./CommentCreator";
@@ -9,9 +9,11 @@ import Header from "./Header";
 import { isLoggedIn } from "../utils/auth";
 import axios from "../utils/axios";
 
-async function getCommentDetail(setCommentDetailResponse){
+let apiCallCount = 0;
 
-    const { postid, commentid } = useParams();
+async function getCommentDetail(setCommentDetailResponse, postid, commentid){
+
+    console.log("CommentEditor - API Trigger #" + apiCallCount++);
 
     axios.get("dashboard/post/" + postid + "/comment/" + commentid)
 
@@ -23,8 +25,10 @@ function CommentEditor(){
 
     if(isLoggedIn()){
 
+        const { postid, commentid } = useParams();
         const [commentDetailResponse, setCommentDetailResponse] = useState();
-        getCommentDetail(setCommentDetailResponse);
+
+        useEffect(() => { getCommentDetail(setCommentDetailResponse, postid, commentid); }, []);
 
         if(commentDetailResponse){
 

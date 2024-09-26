@@ -13,7 +13,7 @@ let apiCallCount = 0;
 
 async function getDashboardResponse(setDashboardResponse){
 
-    console.log("API Trigger #" + apiCallCount++);
+    console.log("Dashboard - API Trigger #" + apiCallCount++);
 
     axios.get("dashboard")
 
@@ -162,7 +162,7 @@ function Dashboard(){
         let  index = 0;
 
         const [ dashboardResponse, setDashboardResponse ] = useState();
-        useEffect(() => { getDashboardResponse(setDashboardResponse); });
+        useEffect(() => { getDashboardResponse(setDashboardResponse); }, []);
         
         if(dashboardResponse){
 
