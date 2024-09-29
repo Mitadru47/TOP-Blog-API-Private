@@ -15,6 +15,14 @@ function handleSubmit(event){
     const plainFormData = Object.fromEntries(data.entries());
 	const formDataJsonString = JSON.stringify(plainFormData);
 
+    // Disabling Inputs to prevent Spamming
+
+    let body = document.getElementById("body-input");
+    let submit = document.getElementById("submit-button");
+
+    body.disabled = true;
+    submit.disabled = true;
+
     if(isLoggedIn()){
 
         axios.post("dashboard/post/" + plainFormData.post + "/comment/create", formDataJsonString)
@@ -22,35 +30,55 @@ function handleSubmit(event){
             .then((response) => {
             
                 if(response.data.status === "Success!"){
-                
-                    let message = document.getElementById("post-failed-info");
+
+                    let message = document.getElementById("comment-failed-info");
 
                     message.classList.remove("display-on");
                     message.classList.add("display-off");
 
-                    window.location.href = BLOG_API_PRIVATE_DASHBOARD + response.data.url;
+                    // After successful POST, removing previous comment body to prevent Spamming
+
+                    body.value = "";
                 }
 
-                else if(responseBody === "Comment Added Successfully!"){
+                // Re-enabling Inputs after POST
 
-                    let message = document.getElementById("post-failed-info");
-
-                    message.classList.remove("display-on");
-                    message.classList.add("display-off");
-
-                    window.location.href = BLOG_API_PRIVATE_DASHBOARD + "/post/" + plainFormData.post;
-                }
-
-                else{
-
-                    let message = document.getElementById("post-failed-info");
-    
-                    message.classList.remove("display-off");
-                    message.classList.add("display-on"); 
-                }
+                body.disabled = false;
+                submit.disabled = false;
             })
 
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                
+                console.log(error);
+            
+                if(error.response.data.status === "Failure!"){
+                
+                    let message = document.getElementById("comment-failed-info");
+    
+                    message.classList.remove("display-off");
+                    message.classList.add("display-on");
+
+                    // Displaying error messages received from backend
+
+                    let err = "";
+                    
+                    for(let i=0; i<error.response.data.error.length; i++){
+                    
+                        if(i === error.response.data.error.length - 1)
+                            err = err + error.response.data.error[i].msg;
+
+                        else
+                            err = err + error.response.data.error[i].msg + "\n ";
+                    }
+
+                    message.innerText = err;
+
+                    // Re-enabling Inputs after POST
+
+                    body.disabled = false;
+                    submit.disabled = false;
+                }
+            });
     }
 
     else
@@ -101,7 +129,7 @@ function CommentCreator({ post, comment }){
                             <a id="cancel-button" href={"/dashboard" + comment.url}>Cancel</a>
                     }
 
-                    <div id="post-failed-info" className="display-off">Something went wrong. Please try again!</div>
+                    <div id="comment-failed-info" className="display-off">Something went wrong. Please try again!</div>
             
                 </form>
 
