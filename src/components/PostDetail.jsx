@@ -1,4 +1,6 @@
 import React from "react";
+
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import Comments from "./Comments";
@@ -12,9 +14,11 @@ import { isLoggedIn } from "../utils/auth";
 import axios from "../utils/axios";
 import { BLOG_API_PRIVATE_DASHBOARD } from "../utils/urls";
 
-async function getPostDetailResponse(setPostDetailResponse){
+let apiCallCount = 0;
 
-    let { id } = useParams();
+async function getPostDetailResponse(setPostDetailResponse, id){
+
+    console.log("PostDetail - API Trigger #" + apiCallCount++);
 
     axios.get("dashboard/post/" + id)
 
@@ -67,8 +71,19 @@ function PostDetail({ headerless }){
 
     if(isLoggedIn()){
 
-        const [postDetailResponse, setPostDetailResponse] = React.useState();
-        getPostDetailResponse(setPostDetailResponse);
+        let { id } = useParams();
+        const [postDetailResponse, setPostDetailResponse] = useState();
+
+        useEffect(() => { 
+    
+            const intervalID = setInterval(() => {
+              getPostDetailResponse(setPostDetailResponse, id); 
+        
+            }, 5000);
+            
+            // Clean-Up Function
+            return (() => { clearInterval(intervalID); });
+        });
 
         if(postDetailResponse){
     

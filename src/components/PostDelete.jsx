@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PostDetail from "./PostDetail";
 
 import { useParams } from "react-router-dom";
@@ -11,9 +11,11 @@ import { isLoggedIn } from "../utils/auth";
 import axios from "../utils/axios";
 import { BLOG_API_PRIVATE_DASHBOARD } from "../utils/urls";
 
-async function getPostDetailResponse(setPostDetailResponse){
+let apiCallCount = 0;
 
-    let { id } = useParams();
+async function getPostDetailResponse(setPostDetailResponse, id){
+
+    console.log("PostEditor - API Trigger #" + apiCallCount++);
 
     axios.get("dashboard/post/" + id)
     
@@ -66,8 +68,10 @@ function PostDelete(){
 
     if(isLoggedIn()){
 
-        const [postDetailResponse, setPostDetailResponse] = React.useState();
-        getPostDetailResponse(setPostDetailResponse);
+        let { id } = useParams();
+        const [postDetailResponse, setPostDetailResponse] = useState();
+
+        useEffect(() => { getPostDetailResponse(setPostDetailResponse, id); }, []);
 
         if(postDetailResponse){
 

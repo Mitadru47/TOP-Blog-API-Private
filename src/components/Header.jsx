@@ -3,7 +3,11 @@ import { useState, useEffect } from "react";
 
 import axios from "../utils/axios";
 
+let apiCallCount = 0;
+
 async function getDashboardResponse(setDashboardResponse){
+
+    console.log("Header - API Trigger #" + apiCallCount++);
 
     axios.get("dashboard")
 
@@ -14,7 +18,7 @@ async function getDashboardResponse(setDashboardResponse){
 function Header(){
 
     const [ dashboardResponse, setDashboardResponse ] = useState();
-    useEffect(() => { getDashboardResponse(setDashboardResponse); });
+    useEffect(() => { getDashboardResponse(setDashboardResponse); }, []);
 
     if(dashboardResponse){
 

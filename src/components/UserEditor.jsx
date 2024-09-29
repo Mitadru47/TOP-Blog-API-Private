@@ -9,7 +9,11 @@ import { isLoggedIn } from "../utils/auth";
 import axios from "../utils/axios";
 import { BLOG_API_PRIVATE_DASHBOARD } from "../utils/urls";
 
+let apiCallCount = 0;
+
 async function getUser(setUserResponse){
+
+    console.log("UserEditor - API Trigger #" + apiCallCount++);
 
     axios.get("dashboard/user")
     
@@ -114,7 +118,7 @@ function UserEditor(){
                                 <br></br>
 
                                 <input type="text" name="username" id="username" placeholder="Username" defaultValue={userResponse[0].username}/>
-                                <input type="password" name="password" id="password" placeholder="Password - Masked" required/>
+                                <input type="password" name="password" id="password" placeholder="Password - Masked" autoComplete="on" required/>
 
                                 <br></br>
                                 <br></br>

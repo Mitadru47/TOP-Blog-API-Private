@@ -15,8 +15,8 @@ function handleSubmit(event){
     axios.post("dashboard/login", formDataJsonString)
 
         .then((response) => {
-        
-            if(!response.data.message){
+            
+            if(response.data.success){
 
                 let message = document.getElementById("login-failed-info");
 
@@ -32,18 +32,33 @@ function handleSubmit(event){
                 let message = document.getElementById("login-failed-info");
 
                 message.classList.remove("display-off");
-                message.classList.add("display-on"); 
+                message.classList.add("display-on");
+
+                message.innerText = "Log in failed, Please try again!";
             }
         })
 
         .catch((error) => {
-            
-            console.log(error);
-        
+    
             let message = document.getElementById("login-failed-info");
 
             message.classList.remove("display-off");
             message.classList.add("display-on"); 
+
+            // Displaying error messages received from backend
+
+            let err = "";
+
+            for(let i=0; i<error.response.data.error.length; i++){
+            
+                if(i === error.response.data.error.length - 1)
+                    err = err + error.response.data.error[i].msg;
+
+                else
+                    err = err + error.response.data.error[i].msg + "\n ";
+            }
+
+            message.innerText = err;
         });
 }
 
@@ -85,11 +100,11 @@ function Login(){
                         <div id="login-form-container-secondary">
 
                             <input type="text" name="username" id="login-username" placeholder="Username"/>
-                            <input type="password" name="password" id="login-password" placeholder="Password - Masked"/>
+                            <input type="password" name="password" id="login-password" placeholder="Password - Masked" autoComplete="on"/>
                             
                             <button type="submit" id="submit-button">Log in</button>
 
-                        </div >
+                        </div>
 
                         <div id="login-form-container-footer">
                        
@@ -100,7 +115,7 @@ function Login(){
 
                             </div>
 
-                            <div id="login-failed-info" className="display-off">Log in failed, Please try again!</div> 
+                            <div id="login-failed-info" className="display-off"></div> 
                             
                         </div>
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import CommentDetail from "./CommentDetail";
@@ -11,9 +11,11 @@ import { isLoggedIn } from "../utils/auth";
 import axios from "../utils/axios";
 import { BLOG_API_PRIVATE_DASHBOARD } from "../utils/urls";
 
-async function getCommentDetail(setCommentDetailResponse){
+let apiCallCount = 0;
 
-    const { postid, commentid } = useParams();
+async function getCommentDetail(setCommentDetailResponse, postid, commentid){
+
+    console.log("CommentDelete - API Trigger #" + apiCallCount++);
 
     axios.get("dashboard/post/" + postid + "/comment/" + commentid)
     
@@ -66,9 +68,11 @@ function CommentDelete(){
 
     if(isLoggedIn()){
 
+        const { postid, commentid } = useParams();
         const [commentDetailResponse, setCommentDetailResponse] = useState();
-        getCommentDetail(setCommentDetailResponse);
 
+        useEffect(() => { getCommentDetail(setCommentDetailResponse, postid, commentid); }, []);
+        
         if(commentDetailResponse){
 
             return(
