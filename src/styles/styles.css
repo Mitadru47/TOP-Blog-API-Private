@@ -9,7 +9,15 @@ body{
 }
 
 .loader{
-  padding-left: 10px;
+
+  padding: 10px 0px;
+  padding-left: 25px;
+}
+
+.error{
+  
+  color: #800000;
+  padding-left: 40px;
 }
 
 /* Login.jsx */
@@ -305,8 +313,6 @@ body{
 
   gap: 10px;
   flex-direction: column;
-
-  padding: 10px 0px;
 }
 
 .list-item{
@@ -637,7 +643,9 @@ body{
 /* PostDelete.jsx */
 
 #delete-dialog{
+
   padding: 10px;
+  padding-left: 25px;
 }
 
 #delete-message{

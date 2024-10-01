@@ -11,7 +11,9 @@ import Header from "./Header";
 
 import { isLoggedIn } from "../utils/auth";
 
+import Loader from "./Loader.jsx";
 import axios from "../utils/axios";
+
 import { BLOG_API_PRIVATE_DASHBOARD } from "../utils/urls";
 
 let apiCallCount = 0;
@@ -23,7 +25,16 @@ async function getPostDetailResponse(setPostDetailResponse, id){
     axios.get("dashboard/post/" + id)
 
         .then((response) => setPostDetailResponse(response.data))
-        .catch((error) => console.log(error));
+        .catch((error) => {
+            
+            console.log(error);
+          
+            let loaderElements = document.getElementsByClassName("loader");
+            loaderElements[0].innerText = "Something went wrong. Failed to load Post...";
+    
+            let errorElements = document.getElementsByClassName("error");
+            errorElements[0].innerText = error;
+        });
 }
 
 function handleSubmit(event){
@@ -214,7 +225,7 @@ function PostDetail({ headerless }){
         }
 
         else
-            return <div className="loader">Loading Post...</div>;
+            return headerless ? <div className="loader">Loading Post...</div> : <Loader name="Post"/>;
     }
 
     else

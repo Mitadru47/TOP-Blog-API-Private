@@ -5,6 +5,8 @@ import Login from "./LogIn";
 import PostCreator from "./PostCreator";
 
 import { isLoggedIn } from "../utils/auth";
+
+import Loader from "./Loader.jsx";
 import axios from "../utils/axios";
 
 let apiCallCount = 0;
@@ -16,7 +18,16 @@ async function getPost(setPost, id){
     axios.get("dashboard/post/" + id)
     
         .then((response) => setPost(response.data))
-        .catch((error) => { console.log(error); });
+        .catch((error) => {
+            
+            console.log(error);
+          
+            let loaderElements = document.getElementsByClassName("loader");
+            loaderElements[0].innerText = "Something went wrong. Failed to load Post Editor...";
+    
+            let errorElements = document.getElementsByClassName("error");
+            errorElements[0].innerText = error;
+        });
 }
 
 function PostEditor() {
@@ -39,7 +50,7 @@ function PostEditor() {
         }
 
         else
-            return <div className="loader">Loading Post Editor...</div>;
+            return <Loader name="Post Editor"/>;
     }
 
     else

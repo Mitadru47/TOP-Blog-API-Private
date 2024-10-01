@@ -4,6 +4,8 @@ import Login from "./LogIn";
 import Header from "./Header";
 
 import { isLoggedIn, getExpirationTime, logout } from "../utils/auth";
+
+import Loader from "./Loader.jsx";
 import axios from "../utils/axios";
 
 let apiCallCount = 0;
@@ -15,7 +17,16 @@ async function getUserDetail(setUserDetailResponse){
     axios.get("dashboard/user")
 
         .then((response) => setUserDetailResponse(response.data))
-        .catch((error) => console.log(error));
+        .catch((error) => {
+            
+            console.log(error);
+          
+            let loaderElements = document.getElementsByClassName("loader");
+            loaderElements[0].innerText = "Something went wrong. Failed to load Author...";
+    
+            let errorElements = document.getElementsByClassName("error");
+            errorElements[0].innerText = error;
+        });
 }
 
 function handleLogout(){
@@ -85,7 +96,7 @@ function UserDetail(){
         }
 
         else
-            return <div className="loader">Loading Author...</div>;
+            return <Loader name="Author"/>;
     }
 
     else

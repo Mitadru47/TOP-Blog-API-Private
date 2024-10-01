@@ -6,7 +6,9 @@ import Header from "./Header";
 
 import { isLoggedIn } from "../utils/auth";
 
+import Loader from "./Loader.jsx";
 import axios from "../utils/axios";
+
 import { BLOG_API_PRIVATE_DASHBOARD } from "../utils/urls";
 
 let apiCallCount = 0;
@@ -18,7 +20,16 @@ async function getUser(setUserResponse){
     axios.get("dashboard/user")
     
         .then((response) => setUserResponse(response.data))
-        .catch((error) => { console.log(error); })
+        .catch((error) => {
+            
+            console.log(error);
+          
+            let loaderElements = document.getElementsByClassName("loader");
+            loaderElements[0].innerText = "Something went wrong. Failed to load Author Editor...";
+    
+            let errorElements = document.getElementsByClassName("error");
+            errorElements[0].innerText = error;
+        });
 }
 
 function handleSubmit(event){
@@ -152,7 +163,7 @@ function UserEditor(){
         }
 
         else
-            return <div className="loader">Loading User Editor...</div>;
+            return <Loader name="Author Editor"/>;
     }
 
     else
