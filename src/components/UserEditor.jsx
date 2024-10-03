@@ -51,7 +51,7 @@ function handleSubmit(event){
             
                 if(response.data.status === "Success!"){
                 
-                    let message = document.getElementById("post-failed-info");
+                    let message = document.getElementById("user-failed-info");
 
                     message.classList.remove("display-on");
                     message.classList.add("display-off");
@@ -61,7 +61,7 @@ function handleSubmit(event){
 
                 else{
 
-                    let message = document.getElementById("post-failed-info");
+                    let message = document.getElementById("user-failed-info");
     
                     message.classList.remove("display-off");
                     message.classList.add("display-on"); 
@@ -72,10 +72,25 @@ function handleSubmit(event){
             
                 console.log(error);
             
-                let message = document.getElementById("post-failed-info");
+                let message = document.getElementById("user-failed-info");
     
                 message.classList.remove("display-off");
                 message.classList.add("display-on"); 
+
+                // Displaying error messages received from backend
+
+                let err = "";
+
+                for(let i=0; i<error.response.data.error.length; i++){
+                
+                    if(i === error.response.data.error.length - 1)
+                        err = err + error.response.data.error[i].msg;
+
+                    else
+                        err = err + error.response.data.error[i].msg + "\n ";
+                }
+
+                message.innerText = err;
             });
     }
 
@@ -129,7 +144,7 @@ function UserEditor(){
                                 <br></br>
 
                                 <input type="text" name="username" id="username" placeholder="Username" defaultValue={userResponse[0].username}/>
-                                <input type="password" name="password" id="password" placeholder="Password - Masked" autoComplete="on" required/>
+                                <input type="password" name="password" id="password" placeholder="Password - Masked" autoComplete="on"/>
 
                                 <br></br>
                                 <br></br>
@@ -148,7 +163,7 @@ function UserEditor(){
 
                                     </div>
 
-                                    <div id="post-failed-info" className="display-off">Something went wrong. Please try again!</div>
+                                    <div id="user-failed-info" className="display-off">Something went wrong. Please try again!</div>
                             
                                 </div>
 
