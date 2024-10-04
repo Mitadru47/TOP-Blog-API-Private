@@ -122,6 +122,12 @@ body{
   padding-left: 40px;
 }
 
+#post-failed-info{
+
+  padding-top: 10px;
+  padding-left: 25px;
+}
+
 #publish-status-failed-info{
 
   color: #800000;
