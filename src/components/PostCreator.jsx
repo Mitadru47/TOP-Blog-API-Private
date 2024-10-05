@@ -6,7 +6,9 @@ import Header from "./Header";
 
 import { isLoggedIn } from "../utils/auth";
 
+import Loader from "./Loader.jsx";
 import axios from "../utils/axios";
+
 import { BLOG_API_PRIVATE_DASHBOARD } from "../utils/urls";
 
 let apiCallCount = 0;
@@ -18,7 +20,16 @@ async function getUser(setUserResponse){
     axios.get("dashboard/user")
 
         .then((response) => setUserResponse(response.data))
-        .catch((error) => { console.log(error); })
+        .catch((error) => {
+            
+            console.log(error);
+          
+            let loaderElements = document.getElementsByClassName("loader");
+            loaderElements[0].innerText = "Something went wrong. Failed to load Post Creator/Editor...";
+    
+            let errorElements = document.getElementsByClassName("error");
+            errorElements[0].innerText = error;
+        });
 }
 
 function handleSubmit(event){
@@ -57,7 +68,33 @@ function handleSubmit(event){
                 }
             })
 
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                
+                console.log(error);
+            
+                if(error.response.data.status === "Failure!"){
+                
+                    let message = document.getElementById("post-failed-info");
+    
+                    message.classList.remove("display-off");
+                    message.classList.add("display-on");
+
+                    // Displaying error messages received from backend
+
+                    let err = "";
+                    
+                    for(let i=0; i<error.response.data.error.length; i++){
+                    
+                        if(i === error.response.data.error.length - 1)
+                            err = err + error.response.data.error[i].msg;
+
+                        else
+                            err = err + error.response.data.error[i].msg + "\n ";
+                    }
+
+                    message.innerText = err;
+                }
+            });
     }
 
     else
@@ -118,7 +155,7 @@ function PostCreator(props){
         }
 
         else
-            return <div className="loader">Loading Post Creator/Editor...</div>;
+            return <Loader name="Post Creator/Editor"/>;
     }
 
     else

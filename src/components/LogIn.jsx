@@ -16,7 +16,7 @@ function handleSubmit(event){
 
         .then((response) => {
             
-            if(response.data.success){
+            if(response.data.status === "Success!"){
 
                 let message = document.getElementById("login-failed-info");
 

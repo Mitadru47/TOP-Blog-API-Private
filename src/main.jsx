@@ -61,7 +61,7 @@ const router = createBrowserRouter([
   {
 
     path: "/dashboard/post/create",
-    element: <PostCreator postDetailResponse={{post: [{ id: "", title:"", body: "" }]}}/>
+    element: <PostCreator postDetailResponse={{post: [{ id: "", title: "", body: "" }]}}/>
 
   },
 

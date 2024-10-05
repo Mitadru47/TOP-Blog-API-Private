@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
+import Loader from "./Loader.jsx";
 import axios from "../utils/axios";
 
 let apiCallCount = 0;
@@ -59,7 +60,7 @@ function Header(){
     }
 
     else
-        return <div className="loader">Loading Header...</div>;
+        return <Loader />
 }
 
 export default Header;

@@ -5,6 +5,8 @@ import Login from "./LogIn";
 import Header from "./Header";
 
 import { isLoggedIn } from "../utils/auth";
+
+import Loader from "./Loader.jsx";
 import axios from "../utils/axios";
 
 let apiCallCount = 0;
@@ -16,7 +18,16 @@ async function getCommentDetail(setCommentDetailResponse, postid, commentid){
     axios.get("dashboard/post/" + postid + "/comment/" + commentid)
     
         .then((response) => setCommentDetailResponse(response.data))
-        .catch((error) => console.log(error))
+        .catch((error) => {
+            
+            console.log(error);
+          
+            let loaderElements = document.getElementsByClassName("loader");
+            loaderElements[0].innerText = "Something went wrong. Failed to load Comment...";
+    
+            let errorElements = document.getElementsByClassName("error");
+            errorElements[0].innerText = error;
+        });
 }
 
 function CommentDetail({ headerless }){
@@ -96,7 +107,7 @@ function CommentDetail({ headerless }){
         }
 
         else
-            return <div className="loader">Loading Comment...</div>;
+            return headerless ? <div className="loader">Loading Comment...</div> : <Loader name="Comment"/>;
     }
 
     else
