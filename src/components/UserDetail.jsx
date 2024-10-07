@@ -33,7 +33,7 @@ function handleLogout(){
     logout();
 }
 
-function UserDetail(){
+function UserDetail(props){
     
     if(isLoggedIn()){
 
@@ -49,7 +49,7 @@ function UserDetail(){
                 const intervalID = setInterval(() => {
                 getUserDetail(setUserDetailResponse); 
             
-                }, 5000);
+                }, props.poll);
                 
                 // Clean-Up Function
                 return (() => { clearInterval(intervalID); });

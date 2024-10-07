@@ -78,7 +78,7 @@ function handleSubmit(event){
         window.location.href = BLOG_API_PRIVATE_DASHBOARD;
 }
 
-function PostDetail({ headerless }){
+function PostDetail({ poll, headerless }){
 
     if(isLoggedIn()){
 
@@ -95,7 +95,7 @@ function PostDetail({ headerless }){
                 const intervalID = setInterval(() => {
                 getPostDetailResponse(setPostDetailResponse, id); 
             
-                }, 5000);
+                }, poll);
                 
                 // Clean-Up Function
                 return (() => { clearInterval(intervalID); });

@@ -30,7 +30,7 @@ async function getCommentDetail(setCommentDetailResponse, postid, commentid){
         });
 }
 
-function CommentDetail({ headerless }){
+function CommentDetail({ poll, headerless }){
 
     if(isLoggedIn()){
 
@@ -47,7 +47,7 @@ function CommentDetail({ headerless }){
                 const intervalID = setInterval(() => {
                 getCommentDetail(setCommentDetailResponse, postid, commentid);
             
-                }, 5000);
+                }, poll);
                 
                 // Clean-Up Function
                 return (() => { clearInterval(intervalID); });
