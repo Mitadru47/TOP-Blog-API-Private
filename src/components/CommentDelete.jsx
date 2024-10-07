@@ -13,7 +13,7 @@ import axios from "../utils/axios";
 
 import { BLOG_API_PRIVATE_DASHBOARD } from "../utils/urls";
 
-let apiCallCount = 0;
+let apiCallCount = 1;
 
 async function getCommentDetail(setCommentDetailResponse, postid, commentid){
 

@@ -11,7 +11,7 @@ import { isLoggedIn } from "../utils/auth";
 import Loader from "./Loader.jsx";
 import axios from "../utils/axios";
 
-let apiCallCount = 0;
+let apiCallCount = 1;
 
 async function getCommentDetail(setCommentDetailResponse, postid, commentid){
 
