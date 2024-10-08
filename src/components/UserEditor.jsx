@@ -100,7 +100,7 @@ function handleSubmit(event){
 
 function passwordVisibiltyToggle(){
 
-    var password = document.getElementById("password");
+    let password = document.getElementById("password");
   
     if (password.type === "password"){
     
@@ -112,6 +112,24 @@ function passwordVisibiltyToggle(){
 
         password.type = "password";
         password.placeholder = "Password - Masked"
+    }
+}
+
+function changePasswordVisibiltyToggle(){
+
+    let newPassword = document.getElementById("new-password");
+    let confirmPassword = document.getElementById("confirm-password");
+    
+    if(newPassword.classList.contains("display-off")){
+
+        newPassword.classList.remove("display-off");
+        confirmPassword.classList.remove("display-off");
+    }
+
+    else{
+
+        newPassword.classList.add("display-off");
+        confirmPassword.classList.add("display-off");
     }
 }
 
@@ -147,6 +165,16 @@ function UserEditor(){
                                 <input type="password" name="password" id="password" placeholder="Password - Masked" autoComplete="on"/>
 
                                 <br></br>
+
+                                <div id="change-password-container">
+                                
+                                    <a id="change-password" onClick={changePasswordVisibiltyToggle}>Change Password?</a>
+
+                                    <input type="text" name="newPassword" id="new-password" className="display-off" placeholder="New Password" autoComplete="on"/>
+                                    <input type="text" name="confirmPassword" id="confirm-password" className="display-off" placeholder="Confirm Password" autoComplete="on"/>
+
+                                </div>
+
                                 <br></br>
 
                                 <input type="text" name="id" id="id" defaultValue={userResponse[0].id} hidden/>
