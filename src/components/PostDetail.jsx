@@ -16,7 +16,7 @@ import axios from "../utils/axios";
 
 import { BLOG_API_PRIVATE_DASHBOARD } from "../utils/urls";
 
-let apiCallCount = 0;
+let apiCallCount = 1;
 
 async function getPostDetailResponse(setPostDetailResponse, id){
 
@@ -78,22 +78,28 @@ function handleSubmit(event){
         window.location.href = BLOG_API_PRIVATE_DASHBOARD;
 }
 
-function PostDetail({ headerless }){
+function PostDetail({ poll, headerless }){
 
     if(isLoggedIn()){
 
-        let { id } = useParams();
+        const { id } = useParams();
         const [postDetailResponse, setPostDetailResponse] = useState();
 
         useEffect(() => { 
     
-            const intervalID = setInterval(() => {
-              getPostDetailResponse(setPostDetailResponse, id); 
-        
-            }, 5000);
+            if(apiCallCount === 1)
+                getPostDetailResponse(setPostDetailResponse, id); 
+
+            if(apiCallCount > 1){
+         
+                const intervalID = setInterval(() => {
+                getPostDetailResponse(setPostDetailResponse, id); 
             
-            // Clean-Up Function
-            return (() => { clearInterval(intervalID); });
+                }, poll);
+                
+                // Clean-Up Function
+                return (() => { clearInterval(intervalID); });
+            }
         });
 
         if(postDetailResponse){

@@ -4,24 +4,24 @@ import { useState, useEffect } from "react";
 import Loader from "./Loader.jsx";
 import axios from "../utils/axios";
 
-let apiCallCount = 0;
+let apiCallCount = 1;
 
-async function getDashboardResponse(setDashboardResponse){
+async function getDashboardHeaderResponse(setDashboardHeaderResponse){
 
     console.log("Header - API Trigger #" + apiCallCount++);
 
-    axios.get("dashboard")
+    axios.get("dashboard/header")
 
-        .then((response) => setDashboardResponse(response.data))
+        .then((response) => setDashboardHeaderResponse(response.data))
         .catch((error) => console.log(error));
 }
 
 function Header(){
 
-    const [ dashboardResponse, setDashboardResponse ] = useState();
-    useEffect(() => { getDashboardResponse(setDashboardResponse); }, []);
+    const [ dashboardHeaderResponse, setDashboardHeaderResponse ] = useState();
+    useEffect(() => { getDashboardHeaderResponse(setDashboardHeaderResponse); }, []);
 
-    if(dashboardResponse){
+    if(dashboardHeaderResponse){
 
         return(
 
@@ -44,13 +44,13 @@ function Header(){
                         </div>
 
                         <div id="post-count-container"> 
-                            <p id="post-count">Total Posts: {dashboardResponse.posts.length}</p>
+                            <p id="post-count">Total Posts: {dashboardHeaderResponse.count}</p>
                         </div>
 
                     </div>
 
                     <div id="author-container">
-                        <a id="author" href={"/dashboard" + dashboardResponse.author[0].url}>{dashboardResponse.author[0].username}</a>
+                        <a id="author" href={"/dashboard/user"}>{dashboardHeaderResponse.author}</a>
                     </div>
 
                 </div>

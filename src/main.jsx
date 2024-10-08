@@ -21,6 +21,9 @@ import CommentDelete from "./components/CommentDelete.jsx";
 
 import Login from "./components/LogIn.jsx";
 
+const pollingFrequency = 5000;
+console.log(`Polling Frequency: ${pollingFrequency / 1000}s`);
+
 const router = createBrowserRouter([
 
   {
@@ -47,7 +50,7 @@ const router = createBrowserRouter([
   {
 
     path: "/dashboard/user",
-    element: <UserDetail />
+    element: <UserDetail poll={ pollingFrequency }/>
 
   },
 
@@ -68,7 +71,7 @@ const router = createBrowserRouter([
   {
 
     path: "/dashboard/post/:id",
-    element: <PostDetail headerless={ false }/>
+    element: <PostDetail poll={ pollingFrequency } headerless={ false }/>
 
   },
 
@@ -89,7 +92,7 @@ const router = createBrowserRouter([
   {
 
     path: "/dashboard/post/:postid/comment/:commentid",
-    element: <CommentDetail headerless={ false }/>
+    element: <CommentDetail poll={ pollingFrequency } headerless={ false }/>
     
   },
 

@@ -9,7 +9,7 @@ import { isLoggedIn } from "../utils/auth";
 import Loader from "./Loader.jsx";
 import axios from "../utils/axios";
 
-let apiCallCount = 0;
+let apiCallCount = 1;
 
 async function getCommentDetail(setCommentDetailResponse, postid, commentid){
 
@@ -30,7 +30,7 @@ async function getCommentDetail(setCommentDetailResponse, postid, commentid){
         });
 }
 
-function CommentDetail({ headerless }){
+function CommentDetail({ poll, headerless }){
 
     if(isLoggedIn()){
 
@@ -39,13 +39,19 @@ function CommentDetail({ headerless }){
 
         useEffect(() => { 
     
-            const intervalID = setInterval(() => {
-              getCommentDetail(setCommentDetailResponse, postid, commentid);
-        
-            }, 5000);
+            if(apiCallCount === 1)
+                getCommentDetail(setCommentDetailResponse, postid, commentid);
+
+            if(apiCallCount > 1){
+         
+                const intervalID = setInterval(() => {
+                getCommentDetail(setCommentDetailResponse, postid, commentid);
             
-            // Clean-Up Function
-            return (() => { clearInterval(intervalID); });
+                }, poll);
+                
+                // Clean-Up Function
+                return (() => { clearInterval(intervalID); });
+            }
         });
         
         if(commentDetailResponse){

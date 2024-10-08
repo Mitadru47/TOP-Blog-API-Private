@@ -8,7 +8,7 @@ import { isLoggedIn, getExpirationTime, logout } from "../utils/auth";
 import Loader from "./Loader.jsx";
 import axios from "../utils/axios";
 
-let apiCallCount = 0;
+let apiCallCount = 1;
 
 async function getUserDetail(setUserDetailResponse){
 
@@ -33,7 +33,7 @@ function handleLogout(){
     logout();
 }
 
-function UserDetail(){
+function UserDetail(props){
     
     if(isLoggedIn()){
 
@@ -41,13 +41,19 @@ function UserDetail(){
         
         useEffect(() => { 
     
-            const intervalID = setInterval(() => {
-              getUserDetail(setUserDetailResponse); 
-        
-            }, 5000);
+            if(apiCallCount === 1)
+                getUserDetail(setUserDetailResponse); 
+
+            if(apiCallCount > 1){
+         
+                const intervalID = setInterval(() => {
+                getUserDetail(setUserDetailResponse); 
             
-            // Clean-Up Function
-            return (() => { clearInterval(intervalID); });
+                }, props.poll);
+                
+                // Clean-Up Function
+                return (() => { clearInterval(intervalID); });
+            }
         });
         
         if(userDetailResponse){
